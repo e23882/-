@@ -1,0 +1,202 @@
+
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+	<title>選課推薦系統</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="js/perf_highcharts.js"></script>
+	<style>
+		body 
+		{
+			font-family: "Lato", sans-serif;
+		}
+
+		div.tab 
+		{
+			overflow: hidden;
+			border: 1px solid #ccc;
+			background-color: #f1f1f1;
+		}
+
+		div.tab button 
+		{
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		div.tab button:hover 
+		{
+			background-color: #ddd;
+		}
+
+		div.tab button.active 
+		{
+			background-color: #ccc;
+		}
+
+		.tabcontent 
+		{
+			display: none;
+			padding: 6px 12px;
+			border: 1px solid #ccc;
+			border-top: none;
+		}
+	</style>
+</head>
+<body>
+	<!--側邊選單-->
+	
+				<div data-role="page" style="">
+					<table>
+						<tr>
+							<td style="border-right:solid 1px #b1b2b4; vertical-align:top;background-color:#DDDDDD; width:200px;padding-left:1%;padding-top:1%;">
+								<div style="">
+									<a href="lesson.html" data-ajax="false" style="font-family:微軟正黑體; font-size:25px; text-decoration:none;">課程推薦</a><br>
+									<a href="nopass.html" data-ajax="false" style="font-family:微軟正黑體; font-size:25px; text-decoration:none;">當掉率分析</a>
+								</div>
+							</td>
+							<td style="width:80%;">
+								 <div id="one" class="ui-body-d tablist-content" style="padding-left:3%;">
+									<div>
+									<!-- <form  method="post" action ="showvar.php" > -->
+									<form  method="post" action ="showvar.php" data-ajax="false">
+										<blockquote>
+											<h2 style="font-family:微軟正黑體;">性別</h2>
+											<fieldset data-role="controlgroup" data-type="horizontal">
+												<input type="radio" name="radio-choice_sex1" id="radio-choice_sex1" value="boy" checked="checked">
+												<label for="radio-choice_sex1">男</label>
+												<input type="radio" name="radio-choice_sex1" id="radio-choice_sex2" value="girl">
+												<label for="radio-choice_sex2">女</label>
+											</fieldset>
+
+											<h2 style="font-family:微軟正黑體;">21紀錄</h2>
+											<fieldset data-role="controlgroup" data-type="horizontal">
+												<input type="radio" name="radio-choice_21" id="radio-choice_21yes" value="21yes" checked="checked">
+												<label for="radio-choice_21yes">是</label>
+												<input type="radio" name="radio-choice_21" id="radio-choice_21no" value="21no">
+												<label for="radio-choice_21no">否</label>
+											</fieldset>
+											<h2 style="font-family:微軟正黑體;">年級</h2>
+											<fieldset data-role="controlgroup" data-type="horizontal">
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade1" value="grade1" checked="checked">
+												<label for="radio-choice_grade1">一</label>
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade2" value="grade2">
+												<label for="radio-choice_grade2">二</label>
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade3" value="grade3">
+												<label for="radio-choice_grade3">三</label>
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade4" value="grade4">
+												<label for="radio-choice_grade4">四</label>
+											</fieldset>
+											<h2 style="font-family:微軟正黑體;">修習學分</h2>
+											<select name="select-choice-mini" id="select-choice-mini" data-mini="true" data-inline="true">
+												<option value="25">25</option>
+												<option value="20">20</option>
+												<option value="15">15</option>
+												<option value="10">10</option>
+											</select>
+											
+											<h2 style="font-family:微軟正黑體;">已修習科目</h2>
+										
+											<script>
+												$( function() 
+												{
+													$( "#tabs" ).tabs();
+												} );
+											  </script>
+											<div id="tabs">
+											<ul>
+												<li><a href="#tabs-1">資電學院</a></li>
+												<li><a href="#tabs-2">通識必修</a></li>
+												<li><a href="#tabs-3">通識選修</a></li>
+												<li><a href="#tabs-4">外文</a></li>
+												<li><a href="#tabs-5">體育</a></li>
+											</ul>
+											<div id="tabs-1">
+												<fieldset data-role="controlgroup" data-type="horizontal">
+													<input type="checkbox" name="checkbox_class1_1" id="checkbox_class1_1">
+													<label for="checkbox_class1_1">資料探勘</label>
+													<input type="checkbox" name="checkbox_class1_2" id="checkbox_class1_2">
+													<label for="checkbox_class1_2">80x86</label>
+													<input type="checkbox" name="checkbox_class1_3" id="checkbox_class1_3">
+													<label for="checkbox_class1_3">組合語言</label>
+												</fieldset>
+											</div>
+											<div id="tabs-2">
+												<fieldset data-role="controlgroup" data-type="horizontal">
+													<input type="checkbox" name="checkbox_class2_1" id="checkbox_class2_1">
+													<label for="checkbox_class2_1">國文</label>
+													<input type="checkbox" name="checkbox_class2_2" id="checkbox_class2_2">
+													<label for="checkbox_class2_2">軍訓</label>
+													<input type="checkbox" name="checkbox_class2_3" id="checkbox_class2_3">
+													<label for="checkbox_class2_3">計算機概論</label>
+												</fieldset>
+											</div>
+											<div id="tabs-3">
+												<fieldset data-role="controlgroup" data-type="horizontal">
+													<input type="checkbox" name="checkbox_class3_1" id="checkbox_class3_1">
+													<label for="checkbox_class3_1">通識選修A</label>
+													<input type="checkbox" name="checkbox_class3_2" id="checkbox_class3_2">
+													<label for="checkbox_class3_2">通識選修B</label>
+													<input type="checkbox" name="checkbox_class3_3" id="checkbox_class3_3">
+													<label for="checkbox_class3_3">通識選修C</label>
+												</fieldset>
+											</div>
+											<div id="tabs-4">
+												<fieldset data-role="controlgroup" data-type="horizontal">
+													<input type="checkbox" name="checkbox_class4_1" id="checkbox_class4_1">
+													<label for="checkbox_class4_1">英文</label>
+													<input type="checkbox" name="checkbox_class4_2" id="checkbox_class4_2">
+													<label for="checkbox_class4_2">西班牙文</label>
+													<input type="checkbox" name="checkbox_class4_3" id="checkbox_class4_3">
+													<label for="checkbox_class4_3">法文</label>
+												</fieldset>
+											</div>
+											<div id="tabs-5">
+												<fieldset data-role="controlgroup" data-type="horizontal">
+													<input type="checkbox" name="checkbox_class5_1" id="checkbox_class5_1">
+													<label for="checkbox_class5_1">籃球</label>
+													<input type="checkbox" name="checkbox_class5_2" id="checkbox_class5_2">
+													<label for="checkbox_class5_2">羽毛球</label>
+													<input type="checkbox" name="checkbox_class5_3" id="checkbox_class5_3">
+													<label for="checkbox_class5_3">足球</label>
+												</fieldset>
+											</div>
+											</div>
+											
+											<input id="Submit" type="submit" value="查詢推薦課程">
+											<!-- <input id="Submit" type="submit" value="新增連結" /><!--呼叫ADDnew.php--> -->
+										</blockquote>
+									</form>
+									
+									
+								</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								
+							</td>
+						</tr>
+					</table>
+				</div>
+		
+	
+
+</body>
+</html>

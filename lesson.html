@@ -1,0 +1,1707 @@
+﻿
+
+
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8" name="class[]" value="viewport" content="width=device-width, initial-scale=1">
+	<title>選課推薦系統</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="js/perf_highcharts.js"></script>
+	<style>
+		body 
+		{
+			font-family: "Lato", sans-serif;
+		}
+
+		div.tab 
+		{
+			overflow: hidden;
+			border: 1px solid #ccc;
+			background-color: #f1f1f1;
+		}
+
+		div.tab button 
+		{
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		div.tab button:hover 
+		{
+			background-color: #ddd;
+		}
+
+		div.tab button.active 
+		{
+			background-color: #ccc;
+		}
+
+		.tabcontent 
+		{
+			display: none;
+			padding: 6px 12px;
+			border: 1px solid #ccc;
+			border-top: none;
+		}
+	</style>
+</head>
+<body>
+			
+				<div data-role="page" style="">
+					<table>
+						<tr>
+						<!--側邊選單-->
+							<td style="border-right:solid 1px #b1b2b4; vertical-align:top;background-color:#DDDDDD; width:200px;padding-left:1%;padding-top:1%;">
+								<div style="">
+									<a href="lesson.html" data-ajax="false" style="font-family:微軟正黑體; font-size:25px; text-decoration:none;">課程推薦</a><br>
+									<a href="nopass.html" data-ajax="false" style="font-family:微軟正黑體; font-size:25px; text-decoration:none;">老師關心分析</a>
+								</div>
+							</td>
+							<td style="width:80%;">
+								 <div id="one" class="ui-body-d tablist-content" style="padding-left:3%;">
+									<div>
+									<!-- <form  method="post" action ="showvar.php" > -->
+									<form  method="post" action ="showvar.php" data-ajax="false">
+										<blockquote>
+											<h2 style="font-family:微軟正黑體;">入學年度</h2>
+											<select name="select-choice-year" id="select-choice-year" data-mini="true" data-inline="true">
+												<option value="104">104</option>
+												<option value="103">103</option>
+												<option value="102">102</option>
+												<option value="101">101</option>
+												<option value="100">100</option>
+												<option value="99">99</option>
+												<option value="98">98</option>
+												<option value="97">97</option>
+												<option value="96">96</option>
+												<option value="95">95</option>
+												<option value="94">94</option>
+												<option value="93">93</option>
+												<option value="92">92</option>
+											</select>
+											<h2 style="font-family:微軟正黑體;">入學管道</h2>
+											<select name="select-choice-intoschool" id="select-choice-intoschool" data-mini="true" data-inline="true">
+												<option value="A">個人申請(大學甄選)</option>
+												<option value="B">學校推薦</option>
+												<option value="C">繁星推薦</option>
+												<option value="D">考試入學分發</option>
+												<option value="E">外國學生申請入學</option>
+												<option value="F">轉學考</option>
+											</select>
+											<h2 style="font-family:微軟正黑體;">性別</h2>
+											<fieldset data-role="controlgroup" data-type="horizontal">
+												<input type="radio" name="radio-choice_sex1" id="radio-choice_sex1" value="boy" checked="checked">
+												<label for="radio-choice_sex1">男</label>
+												<input type="radio" name="radio-choice_sex1" id="radio-choice_sex2" value="girl">
+												<label for="radio-choice_sex2">女</label>
+											</fieldset>
+											<h2 style="font-family:微軟正黑體;">來自哪裡</h2>
+											<select name="select-choice-from" id="select-choice-from" data-mini="true" data-inline="true">
+												<option value="live_1">南投</option>
+												<option value="live_2">嘉義縣</option>
+												<option value="live_3">嘉義市</option>
+												<option value="live_4">基隆市</option>
+												<option value="live_5">宜蘭縣</option>
+												<option value="live_6">屏東縣</option>
+												<option value="live_7">彰化縣</option>
+												<option value="live_8">台北(新北)</option>
+												<option value="live_9">新竹市</option>
+												<option value="live_10">新竹縣</option>
+												<option value="live_11">桃園市</option>
+												<option value="live_12">桃園縣</option>
+												<option value="live_13">台中市</option>
+												<option value="live_14">台南市</option>
+												<option value="live_15">台東縣</option>
+												<option value="live_16">花蓮縣</option>
+												<option value="live_17">苗栗縣</option>
+												<option value="live_18">金門縣</option>
+												<option value="live_19">雲林縣</option>
+												<option value="live_20">高雄市</option>
+												<option value="live_99">沒有你的縣市</option>
+											</select>
+											<h2 style="font-family:微軟正黑體;">21紀錄</h2>
+											<fieldset data-role="controlgroup" data-type="horizontal">
+												<input type="radio" name="radio-choice_21" id="radio-choice_21yes" value="21yes" checked="checked">
+												<label for="radio-choice_21yes">是</label>
+												<input type="radio" name="radio-choice_21" id="radio-choice_21no" value="21no">
+												<label for="radio-choice_21no">否</label>
+											</fieldset>
+											<h2 style="font-family:微軟正黑體;">年級</h2>
+											<fieldset data-role="controlgroup" data-type="horizontal">
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade1" value="grade1" checked="checked">
+												<label for="radio-choice_grade1">一</label>
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade2" value="grade2">
+												<label for="radio-choice_grade2">二</label>
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade3" value="grade3">
+												<label for="radio-choice_grade3">三</label>
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade4" value="grade4">
+												<label for="radio-choice_grade4">四</label>
+												<input type="radio" name="radio-choice_grade" id="radio-choice_grade5" value="grade5">
+												<label for="radio-choice_grade5">其它</label>
+											</fieldset>
+											
+										<div>
+											<h2 style="font-family:微軟正黑體;">大一已修習科目</h2>
+											<script>
+												$( function() 
+												{
+													$( "#tabs1" ).tabs();
+												} );
+											  </script>
+											<div id="tabs1">
+												<ul>
+													<li><a href="#tabs1-1">資電學院必修</a></li>
+													<li><a href="#tabs1-2">資電選修</a></li>
+													<li><a href="#tabs1-3">通識必修</a></li>
+													<li><a href="#tabs1-4">通識選修</a></li>
+													<li><a href="#tabs1-5">體育</a></li>
+												</ul>
+												<div id="tabs1-1">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="1_1" id="1_1">
+														<label for="1_1">班級活動</label>
+														<input type="checkbox" name="class[]" value="1_27410" id="1_27410">
+														<label for="1_27410">計算機概論(一)</label>
+														<input type="checkbox" name="class[]" value="1_27441" id="1_27441">
+														<label for="1_27441">計算機概論實習(一)</label>
+														<input type="checkbox" name="class[]" value="1_27420" id="1_27420">
+														<label for="1_27420">計算機概論(二)</label>
+														<input type="checkbox" name="class[]" value="1_27442" id="1_27442">
+														<label for="1_27442">計算機概論實習(二)</label>
+														<input type="checkbox" name="class[]" value="1_48351" id="1_48351">
+														<label for="1_48351">普通物理-電、磁、光</label>
+														<input type="checkbox" name="class[]" value="1_48352" id="1_48352">
+														<label for="1_48352">普通物理-電、磁、光實驗</label>
+														
+														<input type="checkbox" name="class[]" value="1_60512" id="1_60512">
+														<label for="1_60512">微積分(二)實習</label>
+														
+														<input type="checkbox" name="class[]" value="1_60521" id="1_60521">
+														<label for="1_60521">微積分(二)</label>
+														
+														<input type="checkbox" name="class[]" value="1_75850" id="1_75850">
+														<label for="1_75850">邏輯設計</label>
+														
+														<input type="checkbox" name="class[]" value="1_75851" id="1_75851">
+														<label for="1_75851">邏輯設計實習</label>
+														
+														<input type="checkbox" name="class[]" value="1_18550" id="1_18550">
+														<label for="1_18550">系統程式</label>
+														<input type="checkbox" name="class[]" value="1_70500" id="1_70500">
+														<label for="1_70500">機率論</label>
+														<input type="checkbox" name="class[]" value="1_82451" id="1_82451">
+														<label for="1_82451">UNIX應用與實務</label>
+														
+														<input type="checkbox" name="class[]" value="1_28010" id="1_28010">
+														<label for="1_28010">計算機演算法</label>
+														<input type="checkbox" name="class[]" value="1_43080" id="1_43080">
+														<label for="1_43080">專題研究(一)</label>
+														<input type="checkbox" name="class[]" value="1_60600" id="1_60600">
+														<label for="1_60600">微處理機系統</label>
+														<input type="checkbox" name="class[]" value="1_60601" id="1_60601">
+														<label for="1_60601">微處理機系統實習</label>
+														
+														<input type="checkbox" name="class[]" value="1_22580" id="1_22580">
+														<label for="1_22580">物件導向設計</label>
+														<input type="checkbox" name="class[]" value="1_22603" id="1_22603">
+														<label for="1_22603">物件導向設計實習</label>
+														<input type="checkbox" name="class[]" value="1_53001" id="1_53001">
+														<label for="1_53001">電子商務安全</label>
+														<input type="checkbox" name="class[]" value="1_62480" id="1_62480">
+														<label for="1_62480">數位信號處理導論</label>
+														<input type="checkbox" name="class[]" value="1_18470" id="1_18470">
+														<label for="1_18470">系統分析與設計</label>
+														<input type="checkbox" name="class[]" value="1_79968" id="1_79968">
+														<label for="1_79968">資訊與網路安全</label>
+
+														<input type="checkbox" name="class[]" value="1_6621" id="1_6621">
+														<label for="1_6621">互連與高速網路</label>
+														<input type="checkbox" name="class[]" value="1_19690" id="1_19690">
+														<label for="1_19690">作業系統(二)</label>
+														
+														<input type="checkbox" name="class[]" value="1_27600" id="1_27600">
+														<label for="1_27600">計算機結構學</label>
+														<input type="checkbox" name="class[]" value="1_60511" id="1_60511">
+														<label for="1_60511">微積分(一)實習</label>
+														<input type="checkbox" name="class[]" value="1_60520" id="1_60520">
+														<label for="1_60520">微積分(一)</label>
+														<input type="checkbox" name="class[]" value="1_66250" id="1_66250">
+														<label for="1_66250">線性代數</label>
+														<input type="checkbox" name="class[]" value="1_59466" id="1_59466">
+														<label for="1_59466">資電概論與倫理</label>
+														
+														<input type="checkbox" name="class[]" value="1_59660" id="1_59660">
+														<label for="1_59660">資料結構</label>
+														<input type="checkbox" name="class[]" value="1_74900" id="1_74900">
+														<label for="1_74900">離散數學</label>
+														<input type="checkbox" name="class[]" value="1_16710" id="1_16710">
+														<label for="1_16710">作業系統(一)</label>
+														<input type="checkbox" name="class[]" value="1_43090" id="1_43090">
+														<label for="1_43090">專題研究(二)</label>
+														<input type="checkbox" name="class[]" value="1_52800" id="1_52800">
+														<label for="1_52800">電子學</label>
+														<input type="checkbox" name="class[]" value="1_52900" id="1_52900"> 
+														<label for="1_52900">電子學實驗</label>
+														<input type="checkbox" name="class[]" value="1_62450" id="1_62450">
+														<label for="1_62450">數位系統設計</label>
+														<input type="checkbox" name="class[]" value="1_62721" id="1_62721">
+														<label for="1_62721">數位系統設計實驗</label>
+														<input type="checkbox" name="class[]" value="1_44261" id="1_44261">
+														<label for="1_44261">軟體工程導論</label>
+														<input type="checkbox" name="class[]" value="1_44981" id="1_44981">
+														<label for="1_44981">通訊與網路概論</label>
+														<input type="checkbox" name="class[]" value="1_40503" id="1_40503">
+														<label for="1_40503">密碼學</label>
+														<input type="checkbox" name="class[]" value="1_69310" id="1_69310">
+														<label for="1_69310">編譯器</label>
+														<input type="checkbox" name="class[]" value="1_33953" id="1_33953">
+														<label for="1_33953">嵌入式系統導論</label>
+														<input type="checkbox" name="class[]" value="1_48590" id="1_48590">
+														<label for="1_48590">程式語言</label>
+														<input type="checkbox" name="class[]" value="1_59750" id="1_59750">
+														<label for="1_59750">資料庫系統</label>
+													</fieldset>
+												</div>
+												<div id="tabs1-2">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="1_62660" id="1_62660">
+														<label for="1_62660">數位影像處理</label>
+														<input type="checkbox" name="class[]" value="1_31065" id="1_31065">
+														<label for="1_31065">使用者經驗設計</label>
+														<input type="checkbox" name="class[]" value="1_63901" id="1_63901">
+														<label for="1_63901">網路程式設計</label>
+														<input type="checkbox" name="class[]" value="1_59525" id="1_59525">
+														<label for="1_59525">資訊安全管理</label>
+														<input type="checkbox" name="class[]" value="1_59704" id="1_59704">
+														<label for="1_59704">資料倉儲與資料挖掘</label>
+														<input type="checkbox" name="class[]" value="1_19244" id="1_19244">
+														<label for="1_19244">產業實習導論</label>
+														<input type="checkbox" name="class[]" value="1_44262" id="1_44262">
+														<label for="1_44262">軟體品質保證與軟體測試</label>
+														<input type="checkbox" name="class[]" value="1_67872" id="1_67872">
+														<label for="1_67872">寬頻網路</label>
+														<input type="checkbox" name="class[]" value="1_39150" id="1_39150">
+														<label for="1_39150">組合數學</label>
+														<input type="checkbox" name="class[]" value="1_33953" id="1_33953">
+														<label for="1_33953">嵌入式系統導論</label>
+														<input type="checkbox" name="class[]" value="1_30637" id="1_30637">
+														<label for="1_30637">校外專業實習</label>
+													</fieldset>
+												</div>
+												<div id="tabs1-3">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="1_79871" id="1_79871">
+														<label for="1_79871">資訊素養作業一：資料蒐集報告</label>
+														<input type="checkbox" name="class[]" value="1_79872" id="1_79872">
+														<label for="1_79872">資訊素養作業二：危機處理分析</label>
+														<input type="checkbox" name="class[]" value="1_79873" id="1_79873">
+														<label for="1_79873">資訊素養作業三：資訊理論簡測</label>
+														<input type="checkbox" name="class[]" value="1_79874" id="1_79874">
+														<label for="1_79874">資訊素養作業四：實際參訪報告</label>
+														<input type="checkbox" name="class[]" value="1_79875" id="1_79875">
+														<label for="1_79875">資訊素養作業五：自我介紹檔案</label>
+														<input type="checkbox" name="class[]" value="1_79876" id="1_79876">
+														<label for="1_79876">資訊素養作業六：電子書編寫</label>
+														<input type="checkbox" name="class[]" value="1_79877" id="1_79877">
+														<label for="1_79877">資訊素養作業七：影片拍攝剪輯</label>
+														<input type="checkbox" name="class[]" value="1_98237" id="1_98237">
+														<label for="1_98237">文明變遷</label>
+														<input type="checkbox" name="class[]" value="1_6855" id="1_6855">
+														<label for="1_6855">公民視野</label>
+														<input type="checkbox" name="class[]" value="1_13891" id="1_13891">
+														<label for="1_13891">全民國防教育軍事訓練(一)</label>
+														<input type="checkbox" name="class[]" value="1_13892" id="1_13892">
+														<label for="1_13892">全民國防教育軍事訓練(二)</label>
+														<input type="checkbox" name="class[]" value="1_18343" id="1_18343">
+														<label for="1_18343">服務學習</label>
+														<input type="checkbox" name="class[]" value="1_26491" id="1_26491">
+														<label for="1_26491">英文(一)初級</label>
+														<input type="checkbox" name="class[]" value="1_4264" id="1_4264">
+														<label for="1_4264">英文(一)中級</label>
+														<input type="checkbox" name="class[]" value="1_26493" id="1_26493">
+														<label for="1_26493">英文(一)中高級</label>
+														<input type="checkbox" name="class[]" value="1_4265" id="1_4265">
+														<label for="1_4265">英文(一)高級</label>
+														<input type="checkbox" name="class[]" value="1_26501" id="1_26501">
+														<label for="1_26501">英文(二)初級</label>
+														<input type="checkbox" name="class[]" value="1_26502" id="1_26502">
+														<label for="1_26502">英文(二)中級</label>
+														<input type="checkbox" name="class[]" value="1_26503" id="1_26503">
+														<label for="1_26503">英文(二)中高級</label>
+														<input type="checkbox" name="class[]" value="1_26504" id="1_26504">
+														<label for="1_26504">英文(二)高級</label>
+													</fieldset>
+												</div>
+												<div id="tabs1-4">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="1_GH226" id="1_GH226">
+														<label for="1_GH226">當代文學閱讀與寫作</label>
+														<input type="checkbox" name="class[]" value="1_GS234" id="1_GS234">
+														<label for="1_GS234">心理劇與自我成長</label>
+														<input type="checkbox" name="class[]" value="1_GNE03" id="1_GNE03">
+														<label for="1_GNE03">音樂、語言與大腦</label>
+														<input type="checkbox" name="class[]" value="1_GH004" id="1_GH004">
+														<label for="1_GH004">人生哲學</label>
+														<input type="checkbox" name="class[]" value="1_GH005" id="1_GH005">
+														<label for="1_GH005">造環境欣賞</label>
+														<input type="checkbox" name="class[]" value="1_GH006" id="1_GH006">
+														<label for="1_GH006">中國文物欣賞</label>
+														<input type="checkbox" name="class[]" value="1_GH020" id="1_GH020">
+														<label for="1_GH020">音樂欣賞</label>
+														<input type="checkbox" name="class[]" value="1_GH026" id="1_GH026">
+														<label for="1_GH026">詩詞欣賞</label>
+														<input type="checkbox" name="class[]" value="1_GH033" id="1_GH033">
+														<label for="1_GH033">西洋美術賞析</label>
+														<input type="checkbox" name="class[]" value="1_GH036" id="1_GH036">
+														<label for="1_GH036">中國文化遺產及其藝術</label>
+														<input type="checkbox" name="class[]" value="1_GH037" id="1_GH037">
+														<label for="1_GH037">紀實影像解析</label>
+														<input type="checkbox" name="class[]" value="1_GH041" id="1_GH041">
+														<label for="1_GH041">漫談閩南語</label>
+														<input type="checkbox" name="class[]" value="1_GH042" id="1_GH042">
+														<label for="1_GH042">日本歷史與文化</label>
+														<input type="checkbox" name="class[]" value="1_GH043" id="1_GH043">
+														<label for="1_GH043">倫理價值與生命哲學</label>
+														<input type="checkbox" name="class[]" value="1_GH044" id="1_GH044">
+														<label for="1_GH044">文學與生活</label>
+														<input type="checkbox" name="class[]" value="1_GH202" id="1_GH202">
+														<label for="1_GH202">文學、電影DIY</label>
+														<input type="checkbox" name="class[]" value="1_GH206" id="1_GH206">
+														<label for="1_GH206">古典小說</label>
+														<input type="checkbox" name="class[]" value="1_GH207" id="1_GH207">
+														<label for="1_GH207">台灣文學</label>
+														<input type="checkbox" name="class[]" value="1_GH209" id="1_GH209">
+														<label for="1_GH209">台灣民間信仰</label>
+														<input type="checkbox" name="class[]" value="1_GH212" id="1_GH212">
+														<label for="1_GH212">生死與哲學</label>
+														<input type="checkbox" name="class[]" value="1_GH227" id="1_GH227">
+														<label for="1_GH227">電影藝術專題講座</label>
+														<input type="checkbox" name="class[]" value="1_GH215" id="1_GH215">
+														<label for="1_GH215">宗教與人生</label>
+														<input type="checkbox" name="class[]" value="1_GH218" id="1_GH218">
+														<label for="1_GH218">音樂與人生</label>
+														<input type="checkbox" name="class[]" value="1_GH232" id="1_GH232">
+														<label for="1_GH232">應用文</label>
+														<input type="checkbox" name="class[]" value="1_GH234" id="1_GH234">
+														<label for="1_GH234">領導的藝術</label>
+														<input type="checkbox" name="class[]" value="1_GH238" id="1_GH238">
+														<label for="1_GH238">批判思考</label>
+														<input type="checkbox" name="class[]" value="1_GH239" id="1_GH239">
+														<label for="1_GH239">性別與醫學倫理</label>
+														<input type="checkbox" name="class[]" value="1_GH241" id="1_GH241">
+														<label for="1_GH241">旅遊與多元學習</label>
+														<input type="checkbox" name="class[]" value="1_GH243" id="1_GH243">
+														<label for="1_GH243">從風景繪畫看臺灣歷史</label>
+														<input type="checkbox" name="class[]" value="1_GH251" id="1_GH251">
+														<label for="1_GH251">向儒道思想學情緒管理</label>
+														<input type="checkbox" name="class[]" value="1_GH252" id="1_GH252">
+														<label for="1_GH252">倫理思維與社會正義</label>
+														<input type="checkbox" name="class[]" value="1_GH254" id="1_GH254">
+														<label for="1_GH254">台灣環境與永續生活</label>
+														<input type="checkbox" name="class[]" value="1_GHE04" id="1_GHE04">
+														<label for="1_GHE04">世界音樂賞析</label>
+														<input type="checkbox" name="class[]" value="1_GN001" id="1_GN001">
+														<label for="1_GN001">土地關懷之旅</label>
+														<input type="checkbox" name="class[]" value="1_GN006" id="1_GN006">
+														<label for="1_GN006">生命科學</label>
+														<input type="checkbox" name="class[]" value="1_GN008" id="1_GN008">
+														<label for="1_GN008">生活中之物理</label>
+														<input type="checkbox" name="class[]" value="1_GN009" id="1_GN009">
+														<label for="1_GN009">皮膚保養醫學</label>
+														<input type="checkbox" name="class[]" value="1_GN017" id="1_GN017">
+														<label for="1_GN017">第三波戰爭之科技武器</label>
+														<input type="checkbox" name="class[]" value="1_GN020" id="1_GN020">
+														<label for="1_GN020">環境化學與環境生態</label>
+														<input type="checkbox" name="class[]" value="1_GN022" id="1_GN022">
+														<label for="1_GN022">現代軍事學</label>
+														<input type="checkbox" name="class[]" value="1_GN029" id="1_GN029">
+														<label for="1_GN029">科學傳播概論</label>
+														<input type="checkbox" name="class[]" value="1_GN037" id="1_GN037">
+														<label for="1_GN037">生活中的毒化物</label>
+														<input type="checkbox" name="class[]" value="1_GN038" id="1_GN038">
+														<label for="1_GN038">職業安全與衛生</label>
+														<input type="checkbox" name="class[]" value="1_GN041" id="1_GN041">
+														<label for="1_GN041">實用營養學</label>
+														<input type="checkbox" name="class[]" value="1_GN042" id="1_GN042">
+														<label for="1_GN042">國防科技與產業發展</label>
+														<input type="checkbox" name="class[]" value="1_GN043" id="1_GN043">
+														<label for="1_GN043">創新綠色科技</label>
+														<input type="checkbox" name="class[]" value="1_GN044" id="1_GN044">
+														<label for="1_GN044">系統品質建模與挑戰</label>
+														<input type="checkbox" name="class[]" value="1_GN208" id="1_GN208">
+														<label for="1_GN208">全球暖化與綠色環境設計</label>
+														<input type="checkbox" name="class[]" value="1_GN211" id="1_GN211">
+														<label for="1_GN211">奈米科技與生活</label>
+														<input type="checkbox" name="class[]" value="1_GN215" id="1_GN215">
+														<label for="1_GN215">科學的發明與應用</label>
+														<input type="checkbox" name="class[]" value="1_GN218" id="1_GN218">
+														<label for="1_GN218">殺蟲劑與生活</label>
+														<input type="checkbox" name="class[]" value="1_GN223" id="1_GN223">
+														<label for="1_GN223">肇事科學鑑定實務</label>
+														<input type="checkbox" name="class[]" value="1_GN224" id="1_GN224">
+														<label for="1_GN224">認識天然災害</label>
+														<input type="checkbox" name="class[]" value="1_GN226" id="1_GN226">
+														<label for="1_GN226">衛星科技應用</label>
+														<input type="checkbox" name="class[]" value="1_GN227" id="1_GN227">
+														<label for="1_GN227">營養與健康</label>
+														<input type="checkbox" name="class[]" value="1_GN228" id="1_GN228">
+														<label for="1_GN228">環境資源保育探索專題</label>
+														<input type="checkbox" name="class[]" value="1_GN229" id="1_GN229">
+														<label for="1_GN229">環境與公害</label>
+														<input type="checkbox" name="class[]" value="1_GN231" id="1_GN231">
+														<label for="1_GN231">醫學與人生</label>
+														<input type="checkbox" name="class[]" value="1_GN237" id="1_GN237">
+														<label for="1_GN237">化粧品科學與生活時尚</label>
+														<input type="checkbox" name="class[]" value="1_GN247" id="1_GN247">
+														<label for="1_GN247">材料與生活</label>
+														<input type="checkbox" name="class[]" value="1_GN252" id="1_GN252">
+														<label for="1_GN252">智慧城市與行動應用</label>
+														<input type="checkbox" name="class[]" value="1_GN253" id="1_GN253">
+														<label for="1_GN253">智慧城市無所不在的監測系統</label>
+														<input type="checkbox" name="class[]" value="1_GN255" id="1_GN255">
+														<label for="1_GN255">3D城市與數位校園</label>
+														<input type="checkbox" name="class[]" value="1_GN259" id="1_GN259">
+														<label for="1_GN259">食品加工的秘密</label>
+														<input type="checkbox" name="class[]" value="1_GS002" id="1_GS002">
+														<label for="1_GS002">中華民國憲法</label>
+														<input type="checkbox" name="class[]" value="1_GS009" id="1_GS009">
+														<label for="1_GS009">行政學</label>
+														<input type="checkbox" name="class[]" value="1_GS017" id="1_GS017">
+														<label for="1_GS017">國際關係</label>
+														<input type="checkbox" name="class[]" value="1_GS027" id="1_GS027">
+														<label for="1_GS027">戀愛心理學</label>
+														<input type="checkbox" name="class[]" value="1_GS037" id="1_GS037">
+														<label for="1_GS037">公民社會的政策參與</label>
+														<input type="checkbox" name="class[]" value="1_GS038" id="1_GS038">
+														<label for="1_GS038">智慧財產之保護與實務</label>
+														<input type="checkbox" name="class[]" value="1_GS039" id="1_GS039">
+														<label for="1_GS039">心理學整合與發展</label>
+														<input type="checkbox" name="class[]" value="1_GS041" id="1_GS041">
+														<label for="1_GS041">教育的理論與實踐</label>
+														<input type="checkbox" name="class[]" value="1_GS044" id="1_GS044">
+														<label for="1_GS044">經濟與生活</label>
+														<input type="checkbox" name="class[]" value="1_GS045" id="1_GS045">
+														<label for="1_GS045">管理面面觀</label>
+														<input type="checkbox" name="class[]" value="1_GS201" id="1_GS201">
+														<label for="1_GS201">大陸問題研究</label>
+														<input type="checkbox" name="class[]" value="1_GS204" id="1_GS204">
+														<label for="1_GS204">台灣社會文化變遷</label>
+														<input type="checkbox" name="class[]" value="1_GS206" id="1_GS206">
+														<label for="1_GS206">民法實用</label>
+														<input type="checkbox" name="class[]" value="1_GS207" id="1_GS207">
+														<label for="1_GS207">生涯規劃</label>
+														<input type="checkbox" name="class[]" value="1_GS210" id="1_GS210">
+														<label for="1_GS210">投資與理財</label>
+														<input type="checkbox" name="class[]" value="1_GS214" id="1_GS214">
+														<label for="1_GS214">服務學習專題</label>
+														<input type="checkbox" name="class[]" value="1_GS222" id="1_GS222">
+														<label for="1_GS222">婚姻與家庭</label>
+														<input type="checkbox" name="class[]" value="1_GS226" id="1_GS226">
+														<label for="1_GS226">新聞與媒體</label>
+														<input type="checkbox" name="class[]" value="1_GS243" id="1_GS243">
+														<label for="1_GS243">綠色環境與經濟</label>
+														<input type="checkbox" name="class[]" value="1_GS245" id="1_GS245">
+														<label for="1_GS245">性別教育與服務-學習</label>
+														<input type="checkbox" name="class[]" value="1_GS251" id="1_GS251">
+														<label for="1_GS251">智慧城市競爭力</label>
+														<input type="checkbox" name="class[]" value="1_GS254" id="1_GS254">
+														<label for="1_GS254">現代韓國社會和文化</label>
+														<input type="checkbox" name="class[]" value="1_GSE03" id="1_GSE03">
+														<label for="1_GSE03">臺灣政治經濟發展</label>
+														<input type="checkbox" name="class[]" value="1_GS239" id="1_GS239">
+														<label for="1_GS239">時間管理專題</label>
+														<input type="checkbox" name="class[]" value="1_GM205" id="1_GM205">
+														<label for="1_GM205">初階智慧型創新</label>
+														<input type="checkbox" name="class[]" value="1_GM216" id="1_GM216">
+														<label for="1_GM216">觀光美儀與國際禮儀</label>
+														<input type="checkbox" name="class[]" value="1_GM218" id="1_GM218">
+														<label for="1_GM218">空間資訊與智慧生活</label>
+														<input type="checkbox" name="class[]" value="1_GM219" id="1_GM219">
+														<label for="1_GM219">專案管理基礎知識培養</label>
+														<input type="checkbox" name="class[]" value="1_GM220" id="1_GM220">
+														<label for="1_GM220">消費行為與新產品企劃</label>
+														<input type="checkbox" name="class[]" value="1_GM228" id="1_GM228">
+														<label for="1_GM228">從空間看世界</label>
+														<input type="checkbox" name="class[]" value="1_GM243" id="1_GM243">
+														<label for="1_GM243">圓一場藝術家的夢</label>
+														<input type="checkbox" name="class[]" value="1_GM246" id="1_GM246">
+														<label for="1_GM246">音樂劇實作演出</label>
+														<input type="checkbox" name="class[]" value="1_GM247" id="1_GM247">
+														<label for="1_GM247">社區文化感動行銷</label>
+														<input type="checkbox" name="class[]" value="1_GM252" id="1_GM252">
+														<label for="1_GM252">智慧的天空之眼</label>
+														<input type="checkbox" name="class[]" value="1_GM260" id="1_GM260">
+														<label for="1_GM260">智慧綠台灣</label>
+														<input type="checkbox" name="class[]" value="1_GM267" id="1_GM267">
+														<label for="1_GM267">3D列印趨勢與應用</label>
+														<input type="checkbox" name="class[]" value="1_GM268" id="1_GM268">
+														<label for="1_GM268">智慧定位-衛星導航</label>
+														<input type="checkbox" name="class[]" value="1_GM273" id="1_GM273">
+														<label for="1_GM273">創業與創新</label>
+														<input type="checkbox" name="class[]" value="1_GM297" id="1_GM297">
+														<label for="1_GM297">傳統藝術文化與技藝入門</label>
+														<input type="checkbox" name="class[]" value="1_GH019" id="1_GH019">
+														<label for="1_GH019">英美文學欣賞</label>
+														<input type="checkbox" name="class[]" value="1_GH201" id="1_GH201">
+														<label for="1_GH201">文物欣賞與藝術創作專題</label>
+														<input type="checkbox" name="class[]" value="1_GH253" id="1_GH253">
+														<label for="1_GH253">西洋文學與文化</label>
+														<input type="checkbox" name="class[]" value="1_GN039" id="1_GN039">
+														<label for="1_GN039">環境資源與綠色生活</label>
+														<input type="checkbox" name="class[]" value="1_GN040" id="1_GN040">
+														<label for="1_GN040">生態環境保育</label>
+														<input type="checkbox" name="class[]" value="1_GN205" id="1_GN205">
+														<label for="1_GN205">生物學與生物倫理</label>
+														<input type="checkbox" name="class[]" value="1_GN240" id="1_GN240">
+														<label for="1_GN240">性別與心理衛生</label>
+														<input type="checkbox" name="class[]" value="1_GN243" id="1_GN243">
+														<label for="1_GN243">醫學美容與人生</label>
+														<input type="checkbox" name="class[]" value="1_GN244" id="1_GN244">
+														<label for="1_GN244">綠能與環境</label>
+														<input type="checkbox" name="class[]" value="1_GN249" id="1_GN249">
+														<label for="1_GN249">生活中的工程與科技</label>
+														<input type="checkbox" name="class[]" value="1_GN256" id="1_GN256">
+														<label for="1_GN256">氣候變遷對臺灣之衝擊</label>
+														<input type="checkbox" name="class[]" value="1_GN258" id="1_GN258">
+														<label for="1_GN258">食品衛生與安全</label>
+														<input type="checkbox" name="class[]" value="1_GS008" id="1_GS008">
+														<label for="1_GS008">地方自治</label>
+														<input type="checkbox" name="class[]" value="1_GS032" id="1_GS032">
+														<label for="1_GS032">台灣社會與文化</label>
+														<input type="checkbox" name="class[]" value="1_GS036" id="1_GS036">
+														<label for="1_GS036">個人資料保護法</label>
+														<input type="checkbox" name="class[]" value="1_GS038" id="1_GS038">
+														<label for="1_GS038">智慧財產之保護與實務</label>
+														<input type="checkbox" name="class[]" value="1_GS046" id="1_GS046">
+														<label for="1_GS046">社會學與生活體驗</label>
+														<input type="checkbox" name="class[]" value="1_GS206" id="1_GS206">
+														<label for="1_GS206">民法實用</label>
+														<input type="checkbox" name="class[]" value="1_GS221" id="1_GS221">
+														<label for="1_GS221">消費者保護法</label>
+														<input type="checkbox" name="class[]" value="1_GS223" id="1_GS223">
+														<label for="1_GS223">教育與人生</label>
+														<input type="checkbox" name="class[]" value="1_GN235" id="1_GN235">
+														<label for="1_GN235">大陸文教、社經與科技發展大觀</label>
+														<input type="checkbox" name="class[]" value="1_GS248" id="1_GS248">
+														<label for="1_GS248">策略理論與中國崛起</label>
+														<input type="checkbox" name="class[]" value="1_GM211" id="1_GM211">
+														<label for="1_GM211"> 歐洲舞台藝術表演</label>
+														<input type="checkbox" name="class[]" value="1_GM212" id="1_GM212">
+														<label for="1_GM212">社區支持型農業之在地實踐</label>
+													</fieldset>
+												</div>
+												<div id="tabs1-5">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="1_99150" id="1_99150">
+														<label for="1_99150">體育－游泳</label>
+														<input type="checkbox" name="class[]" value="1_161" id="1_161">
+														<label for="1_161">體育(一)</label>
+														<input type="checkbox" name="class[]" value="1_162" id="1_162">
+														<label for="1_162">體育(二)</label>
+														<input type="checkbox" name="class[]" value="1_303" id="1_303">
+														<label for="1_303">體育－武術</label>
+														<input type="checkbox" name="class[]" value="1_21760" id="1_21760">
+														<label for="1_21760">體育-彼拉提斯</label>
+														<input type="checkbox" name="class[]" value="1_21761" id="1_21761">
+														<label for="1_21761">體育－健康與塑身</label>
+														<input type="checkbox" name="class[]" value="1_99010" id="1_99010">
+														<label for="1_99010">體育－手球</label>
+														<input type="checkbox" name="class[]" value="1_99012" id="1_99012">
+														<label for="1_99012">體育－太極十八式</label>
+														<input type="checkbox" name="class[]" value="1_99015" id="1_99015">
+														<label for="1_99015">體育－攀岩</label>
+														<input type="checkbox" name="class[]" value="1_99017" id="1_99017">
+														<label for="1_99017">體育－民俗體育</label>
+														<input type="checkbox" name="class[]" value="1_99019" id="1_99019">
+														<label for="1_99019">體育－瑜珈</label>
+														<input type="checkbox" name="class[]" value="1_99021" id="1_99021">
+														<label for="1_99021">體育－強力塑身</label>
+														<input type="checkbox" name="class[]" value="1_99023" id="1_99023">
+														<label for="1_99023">體育－飛輪有氧</label>
+														<input type="checkbox" name="class[]" value="1_99026" id="1_99026">
+														<label for="1_99026">體育－羽球進階</label>
+														<input type="checkbox" name="class[]" value="1_99031" id="1_99031">
+														<label for="1_99031">體育－飛盤</label>
+														<input type="checkbox" name="class[]" value="1_99070" id="1_99070">
+														<label for="1_99070">體育－足球</label>
+														<input type="checkbox" name="class[]" value="1_99090" id="1_99090">
+														<label for="1_99090">體育－桌球</label>
+														<input type="checkbox" name="class[]" value="1_99100" id="1_99100">
+														<label for="1_99100">體育－軟式網球</label>
+														<input type="checkbox" name="class[]" value="1_99110" id="1_99110">
+														<label for="1_99110">體育－硬式網球</label>
+														<input type="checkbox" name="class[]" value="1_99220" id="1_99220">
+														<label for="1_99220">體育－籃球</label>
+														<input type="checkbox" name="class[]" value="1_99120" id="1_99120">
+														<label for="1_99120">體育－國術(太極拳)</label>
+														<input type="checkbox" name="class[]" value="1_99140" id="1_99140">
+														<label for="1_99140">體育－排球</label>
+														<input type="checkbox" name="class[]" value="1_99231" id="1_99231">
+														<label for="1_99231">體育－爵士韻律流行舞</label>
+														<input type="checkbox" name="class[]" value="1_99240" id="1_99240">
+														<label for="1_99240">體育－高爾夫球</label>
+														<input type="checkbox" name="class[]" value="1_99250" id="1_99250">
+														<label for="1_99250">體育－防身術</label>
+														<input type="checkbox" name="class[]" value="1_99260" id="1_99260">
+														<label for="1_99260">體育－羽球</label>
+														<input type="checkbox" name="class[]" value="1_99310" id="1_99310">
+														<label for="1_99310">體育－階梯有氧運動</label>
+														<input type="checkbox" name="class[]" value="1_99351" id="1_99351">
+														<label for="1_99351">體育－韻律舞蹈</label>
+														<input type="checkbox" name="class[]" value="1_99060" id="1_99060">
+														<label for="1_99060">體育－適應體育班</label>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+										<div>
+											<h2 style="font-family:微軟正黑體;">大二已修習科目</h2>
+											<script>
+												$( function() 
+												{
+													$( "#tabs2" ).tabs();
+												} );
+											  </script>
+											<div id="tabs2">
+												<ul>
+													<li><a href="#tabs2-1">資電學院必修</a></li>
+													<li><a href="#tabs2-2">資電選修</a></li>
+													<li><a href="#tabs2-3">通識必修</a></li>
+													<li><a href="#tabs2-4">通識選修</a></li>
+													<li><a href="#tabs2-5">體育</a></li>
+												</ul>
+												<div id="tabs2-1">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="2_1_1" id="2_1_1">
+														<label for="2_1_1">班級活動</label>
+														<input type="checkbox" name="class[]" value="2_1_2" id="2_1_2">
+														<label for="2_1_2">計算機概論(一)</label>
+														<input type="checkbox" name="class[]" value="2_1_3" id="2_1_3">
+														<label for="2_1_3">計算機概論實習(一)</label>
+														<input type="checkbox" name="class[]" value="2_1_4" id="2_1_4">
+														<label for="2_1_4">計算機概論(二)</label>
+														<input type="checkbox" name="class[]" value="2_1_5" id="2_1_5">
+														<label for="2_1_5">計算機概論實習(二)</label>
+														<input type="checkbox" name="class[]" value="2_1_6" id="2_1_6">
+														<label for="2_1_6">普通物理-電、磁、光</label>
+														<input type="checkbox" name="class[]" value="2_1_7" id="2_1_7">
+														<label for="2_1_7">普通物理-電、磁、光實驗</label>
+														<input type="checkbox" name="class[]" value="2_1_8" id="2_1_8">
+														<label for="2_1_8">微積分(二)實習</label>
+														<input type="checkbox" name="class[]" value="2_1_9" id="2_1_9">
+														<label for="2_1_9">微積分(二)</label>
+														<input type="checkbox" name="class[]" value="2_1_10" id="2_1_10">
+														<label for="2_1_10">邏輯設計</label>
+														<input type="checkbox" name="class[]" value="2_1_11" id="2_1_11">
+														<label for="2_1_11">邏輯設計實習</label>
+														<input type="checkbox" name="class[]" value="2_1_12" id="2_1_12">
+														<label for="2_1_12">系統程式</label>
+														<input type="checkbox" name="class[]" value="2_1_13" id="2_1_13">
+														<label for="2_1_13">機率論</label>
+														<input type="checkbox" name="class[]" value="2_82451" id="2_82451">
+														<label for="2_82451">UNIX應用與實務</label>
+														<input type="checkbox" name="class[]" value="2_28010" id="2_28010">
+														<label for="2_28010">計算機演算法</label>
+														<input type="checkbox" name="class[]" value="2_43080" id="2_43080">
+														<label for="2_43080">專題研究(一)</label>
+														<input type="checkbox" name="class[]" value="2_60600" id="2_60600">
+														<label for="2_60600">微處理機系統</label>
+														<input type="checkbox" name="class[]" value="2_60601" id="2_60601">
+														<label for="2_60601">微處理機系統實習</label>
+														<input type="checkbox" name="class[]" value="2_22580" id="2_22580">
+														<label for="2_22580">物件導向設計</label>
+														<input type="checkbox" name="class[]" value="2_22603" id="2_22603">
+														<label for="2_22603">物件導向設計實習</label>
+														<input type="checkbox" name="class[]" value="2_53001" id="2_53001">
+														<label for="2_53001">電子商務與安全</label>
+														<input type="checkbox" name="class[]" value="2_62480" id="2_62480">
+														<label for="2_62480">數位信號處理導論</label>
+														<input type="checkbox" name="class[]" value="2_18470" id="2_18470">
+														<label for="2_18470">系統分析與設計</label>
+														<input type="checkbox" name="class[]" value="2_79968" id="2_79968">
+														<label for="2_79968">資訊與網路安全</label>
+														<input type="checkbox" name="class[]" value="2_6621" id="2_6621">
+														<label for="2_6621">互連與高速網路</label>
+														
+														<input type="checkbox" name="class[]" value="2_19690" id="2_19690">
+														<label for="2_19690">作業系統(二)</label>
+														<input type="checkbox" name="class[]" value="2_27600" id="2_27600">
+														<label for="2_27600">計算機結構學</label>
+														<input type="checkbox" name="class[]" value="2_60511" id="2_60511">
+														<label for="2_60511">微積分(一)實習</label>
+														<input type="checkbox" name="class[]" value="2_60520" id="2_60520">
+														<label for="2_60520">微積分(一)</label>
+														
+														<input type="checkbox" name="class[]" value="2_66250" id="2_66250">
+														<label for="2_66250">線性代數</label>
+														<input type="checkbox" name="class[]" value="2_59466" id="2_59466">
+														<label for="2_59466">資電概論與倫理</label>
+														
+														<input type="checkbox" name="class[]" value="2_59660" id="2_59660">
+														<label for="2_59660">資料結構</label>
+														<input type="checkbox" name="class[]" value="2_74900" id="2_74900">
+														<label for="2_74900">離散數學</label>
+														<input type="checkbox" name="class[]" value="2_16710" id="2_16710">
+														<label for="2_16710">作業系統(一)</label>
+														<input type="checkbox" name="class[]" value="2_43090" id="2_43090">
+														<label for="2_43090">專題研究(二)</label>
+														<input type="checkbox" name="class[]" value="2_52800" id="2_52800">
+														<label for="2_52800">電子學</label>
+														<input type="checkbox" name="class[]" value="2_52900" id="2_52900">
+														<label for="2_52900">電子學實驗</label>
+														<input type="checkbox" name="class[]" value="2_62450" id="2_62450">
+														<label for="2_62450">數位系統設計</label>
+														<input type="checkbox" name="class[]" value="2_62721" id="2_62721">
+														<label for="2_62721">數位系統設計實驗</label>
+														<input type="checkbox" name="class[]" value="2_44261" id="2_44261">
+														<label for="2_44261">軟體工程導論</label>
+														<input type="checkbox" name="class[]" value="2_44981" id="2_44981">
+														<label for="2_44981">通訊與網路概論</label>
+														<input type="checkbox" name="class[]" value="2_40503" id="2_40503">
+														<label for="2_40503">密碼學</label>
+														<input type="checkbox" name="class[]" value="2_69310" id="2_69310">
+														<label for="2_69310">編譯器</label>
+														<input type="checkbox" name="class[]" value="2_33953" id="2_33953">
+														<label for="2_33953">嵌入式系統導論</label>
+														<input type="checkbox" name="class[]" value="2_48590" id="2_48590">
+														<label for="2_48590">程式語言</label>
+														<input type="checkbox" name="class[]" value="2_59750" id="2_59750">
+														<label for="2_59750">資料庫系統</label>
+													</fieldset>
+												</div>
+												<div id="tabs2-2">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="2_62660" id="2_62660">
+														<label for="2_62660">數位影像處理</label>
+														<input type="checkbox" name="class[]" value="2_31065" id="2_31065">
+														<label for="2_31065">使用者經驗設計</label>
+														<input type="checkbox" name="class[]" value="2_63901" id="2_63901">
+														<label for="2_63901">網路程式設計</label>
+														<input type="checkbox" name="class[]" value="2_59525" id="2_59525">
+														<label for="2_59525">資訊安全管理</label>
+														<input type="checkbox" name="class[]" value="2_59704" id="2_59704">
+														<label for="2_59704">資料倉儲與資料挖掘x</label>
+														<input type="checkbox" name="class[]" value="2_19244" id="2_19244">
+														<label for="2_19244">產業實習導論</label>
+														<input type="checkbox" name="class[]" value="2_44262" id="2_44262">
+														<label for="2_44262">軟體品質保證與軟體測試</label>
+														<input type="checkbox" name="class[]" value="2_67872" id="2_67872">
+														<label for="2_67872">寬頻網路</label>
+														<input type="checkbox" name="class[]" value="2_39150" id="2_39150">
+														<label for="2_39150">組合數學</label>
+														<input type="checkbox" name="class[]" value="2_33953" id="2_33953">
+														<label for="2_33953">嵌入式系統導論</label>
+														<input type="checkbox" name="class[]" value="2_30637" id="2_30637">
+														<label for="2_30637">校外專業實習</label>
+													</fieldset>
+												</div>
+												<div id="tabs2-3">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="2_79871" id="2_79871">
+														<label for="2_79871">資訊素養作業一：資料蒐集報告</label>
+														<input type="checkbox" name="class[]" value="2_79872" id="2_79872">
+														<label for="2_79872">資訊素養作業二：危機處理分析</label>
+														<input type="checkbox" name="class[]" value="2_79873" id="2_79873">
+														<label for="2_79873">資訊素養作業三：資訊理論簡測</label>
+														<input type="checkbox" name="class[]" value="2_79874" id="2_79874">
+														<label for="2_79874">資訊素養作業四：實際參訪報告</label>
+														<input type="checkbox" name="class[]" value="2_79875" id="2_79875">
+														<label for="2_79875">資訊素養作業五：自我介紹檔案</label>
+														<input type="checkbox" name="class[]" value="2_79876" id="2_79876">
+														<label for="2_79876">資訊素養作業六：電子書編寫</label>
+														<input type="checkbox" name="class[]" value="2_79877" id="2_79877">
+														<label for="2_79877">資訊素養作業七：影片拍攝剪輯</label>
+														<input type="checkbox" name="class[]" value="2_98237" id="2_98237">
+														<label for="2_98237">文明變遷</label>
+														<input type="checkbox" name="class[]" value="2_6855" id="2_6855">
+														<label for="2_6855">公民視野</label>
+														<input type="checkbox" name="class[]" value="2_13891" id="2_13891">
+														<label for="2_13891">全民國防教育軍事訓練(一)</label>
+														<input type="checkbox" name="class[]" value="2_13892" id="2_13892">
+														<label for="2_13892">全民國防教育軍事訓練(二)</label>
+														<input type="checkbox" name="class[]" value="2_18343" id="2_18343">
+														<label for="2_18343">服務學習</label>
+														<input type="checkbox" name="class[]" value="2_26491" id="2_26491">
+														<label for="2_26491">英文(一)初級</label>
+														<input type="checkbox" name="class[]" value="2_4264" id="2_4264">
+														<label for="2_4264">英文(一)中級</label>
+														<input type="checkbox" name="class[]" value="2_26493" id="2_26493">
+														<label for="2_26493">英文(一)中高級</label>
+														<input type="checkbox" name="class[]" value="2_4265" id="2_4265">
+														<label for="2_4265">英文(一)高級</label>
+														<input type="checkbox" name="class[]" value="2_26501" id="2_26501">
+														<label for="2_26501">英文(二)初級</label>
+														<input type="checkbox" name="class[]" value="2_26502" id="2_26502">
+														<label for="2_26502">英文(二)中級</label>
+														<input type="checkbox" name="class[]" value="2_26503" id="2_26503">
+														<label for="2_26503">英文(二)中高級</label>
+														<input type="checkbox" name="class[]" value="2_26504" id="2_26504">
+														<label for="2_26504">英文(二)高級</label>
+													</fieldset>
+												</div>
+												<div id="tabs2-4">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="2_GH226" id="2_GH226">
+														<label for="2_GH226">當代文學閱讀與寫作</label>
+														<input type="checkbox" name="class[]" value="2_GS234" id="2_GS234">
+														<label for="2_GS234">心理劇與自我成長</label>
+														<input type="checkbox" name="class[]" value="2_GNE03" id="2_GNE03">
+														<label for="2_GNE03">音樂、語言與大腦</label>
+														<input type="checkbox" name="class[]" value="2_GH004" id="2_GH004">
+														<label for="2_GH004">人生哲學</label>
+														<input type="checkbox" name="class[]" value="2_GH005" id="2_GH005">
+														<label for="2_GH005">造環境欣賞</label>
+														<input type="checkbox" name="class[]" value="2_GH006" id="2_GH006">
+														<label for="2_GH006">中國文物欣賞</label>
+														<input type="checkbox" name="class[]" value="2_GH020" id="2_GH020">
+														<label for="2_GH020">音樂欣賞</label>
+														<input type="checkbox" name="class[]" value="2_GH026" id="2_GH026">
+														<label for="2_GH026">詩詞欣賞</label>
+														<input type="checkbox" name="class[]" value="2_GH033" id="2_GH033">
+														<label for="2_GH033">西洋美術賞析</label>
+														<input type="checkbox" name="class[]" value="2_GH036" id="2_GH036">
+														<label for="2_GH036">中國文化遺產及其藝術</label>
+														<input type="checkbox" name="class[]" value="2_GH037" id="2_GH037">
+														<label for="2_GH037">紀實影像解析</label>
+														<input type="checkbox" name="class[]" value="2_GH041" id="2_GH041">
+														<label for="2_GH041">漫談閩南語</label>
+														<input type="checkbox" name="class[]" value="2_GH042" id="2_GH042">
+														<label for="2_GH042">日本歷史與文化</label>
+														<input type="checkbox" name="class[]" value="2_GH043" id="2_GH043">
+														<label for="2_GH043">倫理價值與生命哲學</label>
+														<input type="checkbox" name="class[]" value="2_GH044" id="2_GH044">
+														<label for="2_GH044">文學與生活</label>
+														<input type="checkbox" name="class[]" value="2_GH202" id="2_GH202">
+														<label for="2_GH202">文學、電影DIY</label>
+														<input type="checkbox" name="class[]" value="2_GH206" id="2_GH206">
+														<label for="2_GH206">古典小說</label>
+														<input type="checkbox" name="class[]" value="2_GH207" id="2_GH207">
+														<label for="2_GH207">台灣文學</label>
+														<input type="checkbox" name="class[]" value="2_GH209" id="2_GH209">
+														<label for="2_GH209">台灣民間信仰</label>
+														<input type="checkbox" name="class[]" value="2_GH212" id="2_GH212">
+														<label for="2_GH212">生死與哲學</label>
+														<input type="checkbox" name="class[]" value="2_GH227" id="2_GH227">
+														<label for="2_GH227">電影藝術專題講座</label>
+														<input type="checkbox" name="class[]" value="2_GH215" id="2_GH215">
+														<label for="2_GH215">宗教與人生</label>
+														<input type="checkbox" name="class[]" value="2_GH218" id="2_GH218">
+														<label for="2_GH218">音樂與人生</label>
+														<input type="checkbox" name="class[]" value="2_GH232" id="2_GH232">
+														<label for="2_GH232">應用文</label>
+														<input type="checkbox" name="class[]" value="2_GH234" id="2_GH234">
+														<label for="2_GH234">領導的藝術</label>
+														<input type="checkbox" name="class[]" value="2_GH238" id="2_GH238">
+														<label for="2_GH238">批判思考</label>
+														<input type="checkbox" name="class[]" value="2_GH239" id="2_GH239">
+														<label for="2_GH239">性別與醫學倫理</label>
+														<input type="checkbox" name="class[]" value="2_GH241" id="2_GH241">
+														<label for="2_GH241">旅遊與多元學習</label>
+														<input type="checkbox" name="class[]" value="2_GH243" id="2_GH243">
+														<label for="2_GH243">從風景繪畫看臺灣歷史</label>
+														<input type="checkbox" name="class[]" value="2_GH251" id="2_GH251">
+														<label for="2_GH251">向儒道思想學情緒管理</label>
+														<input type="checkbox" name="class[]" value="2_GH252" id="2_GH252">
+														<label for="2_GH252">倫理思維與社會正義</label>
+														<input type="checkbox" name="class[]" value="2_GH254" id="2_GH254">
+														<label for="2_GH254">台灣環境與永續生活</label>
+														<input type="checkbox" name="class[]" value="2_GHE04" id="2_GHE04">
+														<label for="2_GHE04">世界音樂賞析</label>
+														<input type="checkbox" name="class[]" value="2_GN001" id="2_GN001">
+														<label for="2_GN001">土地關懷之旅</label>
+														<input type="checkbox" name="class[]" value="2_GN006" id="2_GN006">
+														<label for="2_GN006">生命科學</label>
+														<input type="checkbox" name="class[]" value="2_GN008" id="2_GN008">
+														<label for="2_GN008">生活中之物理</label>
+														<input type="checkbox" name="class[]" value="2_GN009" id="2_GN009">
+														<label for="2_GN009">皮膚保養醫學</label>
+														<input type="checkbox" name="class[]" value="2_GN017" id="2_GN017">
+														<label for="2_GN017">第三波戰爭之科技武器</label>
+														<input type="checkbox" name="class[]" value="2_GN020" id="2_GN020">
+														<label for="2_GN020">環境化學與環境生態</label>
+														<input type="checkbox" name="class[]" value="2_GN022" id="2_GN022">
+														<label for="2_GN022">現代軍事學</label>
+														<input type="checkbox" name="class[]" value="2_GN029" id="2_GN029">
+														<label for="2_GN029">科學傳播概論</label>
+														<input type="checkbox" name="class[]" value="2_GN037" id="2_GN037">
+														<label for="2_GN037">生活中的毒化物</label>
+														<input type="checkbox" name="class[]" value="2_GN038" id="2_GN038">
+														<label for="2_GN038">職業安全與衛生</label>
+														<input type="checkbox" name="class[]" value="2_GN041" id="2_GN041">
+														<label for="2_GN041">實用營養學</label>
+														<input type="checkbox" name="class[]" value="2_GN042" id="2_GN042">
+														<label for="2_GN042">國防科技與產業發展</label>
+														<input type="checkbox" name="class[]" value="2_GN043" id="2_GN043">
+														<label for="2_GN043">創新綠色科技</label>
+														<input type="checkbox" name="class[]" value="2_GN044" id="2_GN044">
+														<label for="2_GN044">系統品質建模與挑戰</label>
+														<input type="checkbox" name="class[]" value="2_GN208" id="2_GN208">
+														<label for="2_GN208">全球暖化與綠色環境設計</label>
+														<input type="checkbox" name="class[]" value="2_GN211" id="2_GN211">
+														<label for="2_GN211">奈米科技與生活</label>
+														<input type="checkbox" name="class[]" value="2_GN215" id="2_GN215">
+														<label for="2_GN215">科學的發明與應用</label>
+														<input type="checkbox" name="class[]" value="2_GN218" id="2_GN218">
+														<label for="2_GN218">殺蟲劑與生活</label>
+														<input type="checkbox" name="class[]" value="2_GN223" id="2_GN223">
+														<label for="2_GN223">肇事科學鑑定實務</label>
+														<input type="checkbox" name="class[]" value="2_GN224" id="2_GN224">
+														<label for="2_GN224">認識天然災害</label>
+														<input type="checkbox" name="class[]" value="2_GN226" id="2_GN226">
+														<label for="2_GN226">衛星科技應用</label>
+														<input type="checkbox" name="class[]" value="2_GN227" id="2_GN227">
+														<label for="2_GN227">營養與健康</label>
+														<input type="checkbox" name="class[]" value="2_GN228" id="2_GN228">
+														<label for="2_GN228">環境資源保育探索專題</label>
+														<input type="checkbox" name="class[]" value="2_GN229" id="2_GN229">
+														<label for="2_GN229">環境與公害</label>
+														<input type="checkbox" name="class[]" value="2_GN231" id="2_GN231">
+														<label for="2_GN231">醫學與人生</label>
+														<input type="checkbox" name="class[]" value="2_GN237" id="2_GN237">
+														<label for="2_GN237">化粧品科學與生活時尚</label>
+														<input type="checkbox" name="class[]" value="2_GN247" id="2_GN247">
+														<label for="2_GN247">材料與生活</label>
+														<input type="checkbox" name="class[]" value="2_GN252" id="2_GN252">
+														<label for="2_GN252">智慧城市與行動應用</label>
+														<input type="checkbox" name="class[]" value="2_GN253" id="2_GN253">
+														<label for="2_GN253">智慧城市無所不在的監測系統</label>
+														<input type="checkbox" name="class[]" value="2_GN255" id="2_GN255">
+														<label for="2_GN255">3D城市與數位校園</label>
+														<input type="checkbox" name="class[]" value="2_GN259" id="2_GN259">
+														<label for="2_GN259">食品加工的秘密</label>
+														<input type="checkbox" name="class[]" value="2_GS002" id="2_GS002">
+														<label for="2_GS002">中華民國憲法</label>
+														<input type="checkbox" name="class[]" value="2_GS009" id="2_GS009">
+														<label for="2_GS009">行政學</label>
+														<input type="checkbox" name="class[]" value="2_GS017" id="2_GS017">
+														<label for="2_GS017">國際關係</label>
+														<input type="checkbox" name="class[]" value="2_GS027" id="2_GS027">
+														<label for="2_GS027">戀愛心理學</label>
+														<input type="checkbox" name="class[]" value="2_GS037" id="2_GS037">
+														<label for="2_GS037">公民社會的政策參與</label>
+														<input type="checkbox" name="class[]" value="2_GS038" id="2_GS038">
+														<label for="2_GS038">智慧財產之保護與實務</label>
+														<input type="checkbox" name="class[]" value="2_GS039" id="2_GS039">
+														<label for="2_GS039">心理學整合與發展</label>
+														<input type="checkbox" name="class[]" value="2_GS041" id="2_GS041">
+														<label for="2_GS041">教育的理論與實踐</label>
+														<input type="checkbox" name="class[]" value="2_GS044" id="2_GS044">
+														<label for="2_GS044">經濟與生活</label>
+														<input type="checkbox" name="class[]" value="2_GS045" id="2_GS045">
+														<label for="2_GS045">管理面面觀</label>
+														<input type="checkbox" name="class[]" value="2_GS201" id="2_GS201">
+														<label for="2_GS201">大陸問題研究</label>
+														<input type="checkbox" name="class[]" value="2_GS204" id="2_GS204">
+														<label for="2_GS204">台灣社會文化變遷</label>
+														<input type="checkbox" name="class[]" value="2_GS206" id="2_GS206">
+														<label for="2_GS206">民法實用</label>
+														<input type="checkbox" name="class[]" value="2_GS207" id="2_GS207">
+														<label for="2_GS207">生涯規劃</label>
+														<input type="checkbox" name="class[]" value="2_GS210" id="2_GS210">
+														<label for="2_GS210">投資與理財</label>
+														<input type="checkbox" name="class[]" value="2_GS214" id="2_GS214">
+														<label for="2_GS214">服務學習專題</label>
+														<input type="checkbox" name="class[]" value="2_GS222" id="2_GS222">
+														<label for="2_GS222">婚姻與家庭</label>
+														<input type="checkbox" name="class[]" value="2_GS226" id="2_GS226">
+														<label for="2_GS226">新聞與媒體</label>
+														<input type="checkbox" name="class[]" value="2_GS243" id="2_GS243">
+														<label for="2_GS243">綠色環境與經濟</label>
+														<input type="checkbox" name="class[]" value="2_GS245" id="2_GS245">
+														<label for="2_GS245">性別教育與服務-學習</label>
+														<input type="checkbox" name="class[]" value="2_GS251" id="2_GS251">
+														<label for="2_GS251">智慧城市競爭力</label>
+														<input type="checkbox" name="class[]" value="2_GS254" id="2_GS254">
+														<label for="2_GS254">現代韓國社會和文化</label>
+														<input type="checkbox" name="class[]" value="2_GSE03" id="2_GSE03">
+														<label for="2_GSE03">臺灣政治經濟發展</label>
+														<input type="checkbox" name="class[]" value="2_GS239" id="2_GS239">
+														<label for="2_GS239">時間管理專題</label>
+														<input type="checkbox" name="class[]" value="2_GM205" id="2_GM205">
+														<label for="2_GM205">初階智慧型創新</label>
+														<input type="checkbox" name="class[]" value="2_GM216" id="2_GM216">
+														<label for="2_GM216">觀光美儀與國際禮儀</label>
+														<input type="checkbox" name="class[]" value="2_GM218" id="2_GM218">
+														<label for="2_GM218">空間資訊與智慧生活</label>
+														<input type="checkbox" name="class[]" value="2_GM219" id="2_GM219">
+														<label for="2_GM219">專案管理基礎知識培養</label>
+														<input type="checkbox" name="class[]" value="2_GM220" id="2_GM220">
+														<label for="2_GM220">消費行為與新產品企劃</label>
+														<input type="checkbox" name="class[]" value="2_GM228" id="2_GM228">
+														<label for="2_GM228">從空間看世界</label>
+														<input type="checkbox" name="class[]" value="2_GM243" id="2_GM243">
+														<label for="2_GM243">圓一場藝術家的夢</label>
+														<input type="checkbox" name="class[]" value="2_GM246" id="2_GM246">
+														<label for="2_GM246">音樂劇實作演出</label>
+														<input type="checkbox" name="class[]" value="2_GM247" id="2_GM247">
+														<label for="2_GM247">社區文化感動行銷</label>
+														<input type="checkbox" name="class[]" value="2_GM252" id="2_GM252">
+														<label for="2_GM252">智慧的天空之眼</label>
+														<input type="checkbox" name="class[]" value="2_GM260" id="2_GM260">
+														<label for="2_GM260">智慧綠台灣</label>
+														<input type="checkbox" name="class[]" value="2_GM267" id="2_GM267">
+														<label for="2_GM267">3D列印趨勢與應用</label>
+														<input type="checkbox" name="class[]" value="2_GM268" id="2_GM268">
+														<label for="2_GM268">智慧定位-衛星導航</label>
+														<input type="checkbox" name="class[]" value="2_GM273" id="2_GM273">
+														<label for="2_GM273">創業與創新</label>
+														<input type="checkbox" name="class[]" value="2_GM297" id="2_GM297">
+														<label for="2_GM297">傳統藝術文化與技藝入門</label>
+														<input type="checkbox" name="class[]" value="2_GH019" id="2_GH019">
+														<label for="2_GH019">英美文學欣賞</label>
+														<input type="checkbox" name="class[]" value="2_GH201" id="2_GH201">
+														<label for="2_GH201">文物欣賞與藝術創作專題</label>
+														<input type="checkbox" name="class[]" value="2_GH253" id="2_GH253">
+														<label for="2_GH253">西洋文學與文化</label>
+														<input type="checkbox" name="class[]" value="2_GN039" id="2_GN039">
+														<label for="2_GN039">環境資源與綠色生活</label>
+														<input type="checkbox" name="class[]" value="2_GN040" id="2_GN040">
+														<label for="2_GN040">生態環境保育</label>
+														<input type="checkbox" name="class[]" value="2_GN205" id="2_GN205">
+														<label for="2_GN205">生物學與生物倫理</label>
+														<input type="checkbox" name="class[]" value="2_GN240" id="2_GN240">
+														<label for="2_GN240">性別與心理衛生</label>
+														<input type="checkbox" name="class[]" value="2_GN243" id="2_GN243">
+														<label for="2_GN243">醫學美容與人生</label>
+														<input type="checkbox" name="class[]" value="2_GN244" id="2_GN244">
+														<label for="2_GN244">綠能與環境</label>
+														<input type="checkbox" name="class[]" value="2_GN249" id="2_GN249">
+														<label for="2_GN249">生活中的工程與科技</label>
+														<input type="checkbox" name="class[]" value="2_GN256" id="2_GN256">
+														<label for="2_GN256">氣候變遷對臺灣之衝擊</label>
+														<input type="checkbox" name="class[]" value="2_GN258" id="2_GN258">
+														<label for="2_GN258">食品衛生與安全</label>
+														<input type="checkbox" name="class[]" value="2_GS008" id="2_GS008">
+														<label for="2_GS008">地方自治</label>
+														<input type="checkbox" name="class[]" value="2_GS032" id="2_GS032">
+														<label for="2_GS032">台灣社會與文化</label>
+														<input type="checkbox" name="class[]" value="2_GS036" id="2_GS036">
+														<label for="2_GS036">個人資料保護法</label>
+														<input type="checkbox" name="class[]" value="2_GS038" id="2_GS038">
+														<label for="2_GS038">智慧財產之保護與實務</label>
+														<input type="checkbox" name="class[]" value="2_GS046" id="2_GS046">
+														<label for="2_GS046">社會學與生活體驗</label>
+														<input type="checkbox" name="class[]" value="2_GS206" id="2_GS206">
+														<label for="2_GS206">民法實用</label>
+														<input type="checkbox" name="class[]" value="2_GS221" id="2_GS221">
+														<label for="2_GS221">消費者保護法</label>
+														<input type="checkbox" name="class[]" value="2_GS223" id="2_GS223">
+														<label for="2_GS223">教育與人生</label>
+														<input type="checkbox" name="class[]" value="2_GN235" id="2_GN235">
+														<label for="2_GN235">大陸文教、社經與科技發展大觀</label>
+														<input type="checkbox" name="class[]" value="2_GS248" id="2_GS248">
+														<label for="2_GS248">策略理論與中國崛起</label>
+														<input type="checkbox" name="class[]" value="2_GM211" id="2_GM211">
+														<label for="2_GM211"> 歐洲舞台藝術表演</label>
+														<input type="checkbox" name="class[]" value="2_GM212" id="2_GM212">
+														<label for="2_GM212">社區支持型農業之在地實踐</label>
+													</fieldset>
+												</div>
+												<div id="tabs2-5">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="2_99150" id="2_99150">
+														<label for="2_99150">體育－游泳</label>
+														<input type="checkbox" name="class[]" value="2_161" id="2_161">
+														<label for="2_161">體育(一)</label>
+														<input type="checkbox" name="class[]" value="2_162" id="2_162">
+														<label for="2_162">體育(二)</label>
+														<input type="checkbox" name="class[]" value="2_303" id="2_303">
+														<label for="2_303">體育－武術</label>
+														<input type="checkbox" name="class[]" value="2_21760" id="2_21760">
+														<label for="2_21760">體育-彼拉提斯</label>
+														<input type="checkbox" name="class[]" value="2_21761" id="2_21761">
+														<label for="2_21761">體育－健康與塑身</label>
+														<input type="checkbox" name="class[]" value="2_99010" id="2_99010">
+														<label for="2_99010">體育－手球</label>
+														<input type="checkbox" name="class[]" value="2_99012" id="2_99012">
+														<label for="2_99012">體育－太極十八式</label>
+														<input type="checkbox" name="class[]" value="2_99015" id="2_99015">
+														<label for="2_99015">體育－攀岩</label>
+														<input type="checkbox" name="class[]" value="2_99017" id="2_99017">
+														<label for="2_99017">體育－民俗體育</label>
+														<input type="checkbox" name="class[]" value="2_99019" id="2_99019">
+														<label for="2_99019">體育－瑜珈</label>
+														<input type="checkbox" name="class[]" value="2_99021" id="2_99021">
+														<label for="2_99021">體育－強力塑身</label>
+														<input type="checkbox" name="class[]" value="2_99023" id="2_99023">
+														<label for="2_99023">體育－飛輪有氧</label>
+														<input type="checkbox" name="class[]" value="2_99026" id="2_99026">
+														<label for="2_99026">體育－羽球進階</label>
+														<input type="checkbox" name="class[]" value="2_99031" id="2_99031">
+														<label for="2_99031">體育－飛盤</label>
+														<input type="checkbox" name="class[]" value="2_99070" id="2_99070">
+														<label for="2_99070">體育－足球</label>
+														<input type="checkbox" name="class[]" value="2_99090" id="2_99090">
+														<label for="2_99090">體育－桌球</label>
+														<input type="checkbox" name="class[]" value="2_99100" id="2_99100">
+														<label for="2_99100">體育－軟式網球</label>
+														<input type="checkbox" name="class[]" value="2_99110" id="2_99110">
+														<label for="2_99110">體育－硬式網球</label>
+														<input type="checkbox" name="class[]" value="2_99220" id="2_99220">
+														<label for="2_99220">體育－籃球</label>
+														<input type="checkbox" name="class[]" value="2_99120" id="2_99120">
+														<label for="2_99120">體育－國術(太極拳)</label>
+														<input type="checkbox" name="class[]" value="2_99140" id="2_99140">
+														<label for="2_99140">體育－排球</label>
+														<input type="checkbox" name="class[]" value="2_99231" id="2_99231">
+														<label for="2_99231">體育－爵士韻律流行舞</label>
+														<input type="checkbox" name="class[]" value="2_99240" id="2_99240">
+														<label for="2_99240">體育－高爾夫球</label>
+														<input type="checkbox" name="class[]" value="2_99250" id="2_99250">
+														<label for="2_99250">體育－防身術</label>
+														<input type="checkbox" name="class[]" value="2_99260" id="2_99260">
+														<label for="2_99260">體育－羽球</label>
+														<input type="checkbox" name="class[]" value="2_99310" id="2_99310">
+														<label for="2_99310">體育－階梯有氧運動</label>
+														<input type="checkbox" name="class[]" value="2_99351" id="2_99351">
+														<label for="2_99351">體育－韻律舞蹈</label>
+														<input type="checkbox" name="class[]" value="2_99060" id="2_99060">
+														<label for="2_99060">體育－適應體育班</label>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+										<div>
+											<h2 style="font-family:微軟正黑體;">大三已修習科目</h2>
+											<script>
+												$( function() 
+												{
+													$( "#tabs3" ).tabs();
+												} );
+											  </script>
+											<div id="tabs3">
+												<ul>
+													<li><a href="#tabs3-1">資電學院必修</a></li>
+													<li><a href="#tabs3-2">資電選修</a></li>
+													<li><a href="#tabs3-3">通識必修</a></li>
+													<li><a href="#tabs3-4">通識選修</a></li>
+													<li><a href="#tabs3-5">體育</a></li>
+												</ul>
+												<div id="tabs3-1">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="3_1_1" id="3_1_1">
+														<label for="3_1_1">班級活動</label>
+														<input type="checkbox" name="class[]" value="3_1_2" id="3_1_2">
+														<label for="3_1_2">計算機概論(一)</label>
+														<input type="checkbox" name="class[]" value="3_1_3" id="3_1_3">
+														<label for="3_1_3">計算機概論實習(一)</label>
+														<input type="checkbox" name="class[]" value="3_1_4" id="3_1_4">
+														<label for="3_1_4">計算機概論(二)</label>
+														<input type="checkbox" name="class[]" value="3_1_5" id="3_1_5">
+														<label for="3_1_5">計算機概論實習(二)</label>
+														<input type="checkbox" name="class[]" value="3_1_6" id="3_1_6">
+														<label for="3_1_6">普通物理-電、磁、光</label>
+														<input type="checkbox" name="class[]" value="3_1_7" id="3_1_7">
+														<label for="3_1_7">普通物理-電、磁、光實驗</label>
+														<input type="checkbox" name="class[]" value="3_1_8" id="3_1_8">
+														<label for="3_1_8">微積分(二)實習</label>
+														<input type="checkbox" name="class[]" value="3_1_9" id="3_1_9">
+														<label for="3_1_9">微積分(二)</label>
+														<input type="checkbox" name="class[]" value="3_1_10" id="3_1_10">
+														<label for="3_1_10">邏輯設計</label>
+														<input type="checkbox" name="class[]" value="3_1_11" id="3_1_11">
+														<label for="3_1_11">邏輯設計實習</label>
+														<input type="checkbox" name="class[]" value="3_1_12" id="3_1_12">
+														<label for="3_1_12">系統程式</label>
+														<input type="checkbox" name="class[]" value="3_1_13" id="3_1_13">
+														<label for="3_1_13">機率論</label>
+														<input type="checkbox" name="class[]" value="3_82451" id="3_82451">
+														<label for="3_82451">UNIX應用與實務</label>
+														<input type="checkbox" name="class[]" value="3_28010" id="3_28010">
+														<label for="3_28010">計算機演算法</label>
+														<input type="checkbox" name="class[]" value="3_43080" id="3_43080">
+														<label for="3_43080">專題研究(一)</label>
+														<input type="checkbox" name="class[]" value="3_60600" id="3_60600">
+														<label for="3_60600">微處理機系統</label>
+														<input type="checkbox" name="class[]" value="3_60601" id="3_60601">
+														<label for="3_60601">微處理機系統實習</label>
+														<input type="checkbox" name="class[]" value="3_22580" id="3_22580">
+														<label for="3_22580">物件導向設計</label>
+														<input type="checkbox" name="class[]" value="3_22603" id="3_22603">
+														<label for="3_22603">物件導向設計實習</label>
+														<input type="checkbox" name="class[]" value="3_53001" id="3_53001">
+														<label for="3_53001">電子商務安全</label>
+														<input type="checkbox" name="class[]" value="3_62480" id="3_62480">
+														<label for="3_62480">數位信號處理導論</label>
+														<input type="checkbox" name="class[]" value="3_18470" id="3_18470">
+														<label for="3_18470">系統分析與設計</label>
+														<input type="checkbox" name="class[]" value="3_79968" id="3_79968">
+														<label for="3_79968">資訊與網路安全</label>
+
+														<input type="checkbox" name="class[]" value="3_6621" id="3_6621">
+														<label for="3_6621">互連與高速網路</label>
+														<input type="checkbox" name="class[]" value="3_19690" id="3_19690">
+														<label for="3_19690">作業系統(二)</label>
+														<input type="checkbox" name="class[]" value="3_27600" id="3_27600">
+														<label for="3_27600">計算機結構學</label>
+														<input type="checkbox" name="class[]" value="3_60511" id="3_60511">
+														<label for="3_60511">微積分(一)實習</label>
+														<input type="checkbox" name="class[]" value="3_60520" id="3_60520">
+														<label for="3_60520">微積分(一)</label>
+														<input type="checkbox" name="class[]" value="3_66250" id="3_66250">
+														<label for="3_66250">線性代數</label>
+														<input type="checkbox" name="class[]" value="3_59466" id="3_59466">
+														<label for="3_59466">資電概論與倫理</label>
+														
+														<input type="checkbox" name="class[]" value="3_59660" id="3_59660">
+														<label for="3_59660">資料結構</label>
+														<input type="checkbox" name="class[]" value="3_74900" id="3_74900">
+														<label for="3_74900">離散數學</label>
+														<input type="checkbox" name="class[]" value="3_16710" id="3_16710">
+														<label for="3_16710">作業系統(一)</label>
+														<input type="checkbox" name="class[]" value="3_43090" id="3_43090">
+														<label for="3_43090">專題研究(二)</label>
+														<input type="checkbox" name="class[]" value="3_52800" id="3_52800">
+														<label for="3_52800">電子學</label>
+														<input type="checkbox" name="class[]" value="3_52900" id="3_52900">
+														<label for="3_52900">電子學實驗</label>
+														
+														<input type="checkbox" name="class[]" value="3_62450" id="3_62450">
+														<label for="3_62450">數位系統設計</label>
+														<input type="checkbox" name="class[]" value="3_62721" id="3_62721">
+														<label for="3_62721">數位系統設計實驗</label>
+														<input type="checkbox" name="class[]" value="3_44261" id="3_44261">
+														<label for="3_44261">軟體工程導論</label>
+														<input type="checkbox" name="class[]" value="3_44981" id="3_44981">
+														<label for="3_44981">通訊與網路概論</label>
+														<input type="checkbox" name="class[]" value="3_40503" id="3_40503">
+														<label for="3_40503">密碼學</label>
+														<input type="checkbox" name="class[]" value="3_69310" id="3_69310">
+														<label for="3_69310">編譯器</label>
+														<input type="checkbox" name="class[]" value="3_33953" id="3_33953">
+														<label for="3_33953">嵌入式系統導論</label>
+														<input type="checkbox" name="class[]" value="3_48590" id="3_48590">
+														<label for="3_48590">程式語言</label>
+														<input type="checkbox" name="class[]" value="3_59750" id="3_59750">
+														<label for="3_59750">資料庫系統</label>
+													</fieldset>
+												</div>
+												<div id="tabs3-2">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="3_62660" id="3_62660">
+														<label for="3_62660">數位影像處理</label>
+														<input type="checkbox" name="class[]" value="3_31065" id="3_31065">
+														<label for="3_31065">使用者經驗設計</label>
+														<input type="checkbox" name="class[]" value="3_63901" id="3_63901">
+														<label for="3_63901">網路程式設計</label>
+														<input type="checkbox" name="class[]" value="3_59525" id="3_59525">
+														<label for="3_59525">資訊安全管理</label>
+														<input type="checkbox" name="class[]" value="3_59704" id="3_59704">
+														<label for="3_59704">資料倉儲與資料挖掘</label>
+														<input type="checkbox" name="class[]" value="3_19244" id="3_19244">
+														<label for="3_19244">產業實習導論</label>
+														<input type="checkbox" name="class[]" value="3_44262" id="3_44262">
+														<label for="3_44262">軟體品質保證與軟體測試</label>
+														<input type="checkbox" name="class[]" value="3_67872" id="3_67872">
+														<label for="3_67872">寬頻網路</label>
+														<input type="checkbox" name="class[]" value="3_39150" id="3_39150">
+														<label for="3_39150">組合數學</label>
+														<input type="checkbox" name="class[]" value="3_33953" id="3_33953">
+														<label for="3_33953">嵌入式系統導論</label>
+														<input type="checkbox" name="class[]" value="3_30637" id="3_30637">
+														<label for="3_30637">校外專業實習</label>
+													</fieldset>
+												</div>
+												<div id="tabs3-3">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="3_79871" id="3_79871">
+														<label for="3_79871">資訊素養作業一：資料蒐集報告</label>
+														<input type="checkbox" name="class[]" value="3_79872" id="3_79872">
+														<label for="3_79872">資訊素養作業二：危機處理分析</label>
+														<input type="checkbox" name="class[]" value="3_79873" id="3_79873">
+														<label for="3_79873">資訊素養作業三：資訊理論簡測</label>
+														<input type="checkbox" name="class[]" value="3_79874" id="3_79874">
+														<label for="3_79874">資訊素養作業四：實際參訪報告</label>
+														<input type="checkbox" name="class[]" value="3_79875" id="3_79875">
+														<label for="3_79875">資訊素養作業五：自我介紹檔案</label>
+														<input type="checkbox" name="class[]" value="3_79876" id="3_79876">
+														<label for="3_79876">資訊素養作業六：電子書編寫</label>
+														<input type="checkbox" name="class[]" value="3_79877" id="3_79877">
+														<label for="3_79877">資訊素養作業七：影片拍攝剪輯</label>
+														<input type="checkbox" name="class[]" value="3_98237" id="3_98237">
+														<label for="3_98237">文明變遷</label>
+														<input type="checkbox" name="class[]" value="3_6855" id="3_6855">
+														<label for="3_6855">公民視野</label>
+														<input type="checkbox" name="class[]" value="3_13891" id="3_13891">
+														<label for="3_13891">全民國防教育軍事訓練(一)</label>
+														<input type="checkbox" name="class[]" value="3_13892" id="3_13892">
+														<label for="3_13892">全民國防教育軍事訓練(二)</label>
+														<input type="checkbox" name="class[]" value="3_18343" id="3_18343">
+														<label for="3_18343">服務學習</label>
+														<input type="checkbox" name="class[]" value="3_26491" id="3_26491">
+														<label for="3_26491">英文(一)初級</label>
+														<input type="checkbox" name="class[]" value="3_4264" id="3_4264">
+														<label for="3_4264">英文(一)中級</label>
+														<input type="checkbox" name="class[]" value="3_26493" id="3_26493">
+														<label for="3_26493">英文(一)中高級</label>
+														<input type="checkbox" name="class[]" value="3_4265" id="3_4265">
+														<label for="3_4265">英文(一)高級</label>
+														<input type="checkbox" name="class[]" value="3_26501" id="3_26501">
+														<label for="3_26501">英文(二)初級</label>
+														<input type="checkbox" name="class[]" value="3_26502" id="3_26502">
+														<label for="3_26502">英文(二)中級</label>
+														<input type="checkbox" name="class[]" value="3_26503" id="3_26503">
+														<label for="3_26503">英文(二)中高級</label>
+														<input type="checkbox" name="class[]" value="3_26504" id="3_26504">
+														<label for="3_26504">英文(二)高級</label>
+													</fieldset>
+												</div>
+												<div id="tabs3-4">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="3_GH226" id="3_GH226">
+														<label for="3_GH226">當代文學閱讀與寫作</label>
+														<input type="checkbox" name="class[]" value="3_GS234" id="3_GS234">
+														<label for="3_GS234">心理劇與自我成長</label>
+														<input type="checkbox" name="class[]" value="3_GNE03" id="3_GNE03">
+														<label for="3_GNE03">音樂、語言與大腦</label>
+														<input type="checkbox" name="class[]" value="3_GH004" id="3_GH004">
+														<label for="3_GH004">人生哲學</label>
+														<input type="checkbox" name="class[]" value="3_GH005" id="3_GH005">
+														<label for="3_GH005">造環境欣賞</label>
+														<input type="checkbox" name="class[]" value="3_GH006" id="3_GH006">
+														<label for="3_GH006">中國文物欣賞</label>
+														<input type="checkbox" name="class[]" value="3_GH020" id="3_GH020">
+														<label for="3_GH020">音樂欣賞</label>
+														<input type="checkbox" name="class[]" value="3_GH026" id="3_GH026">
+														<label for="3_GH026">詩詞欣賞</label>
+														<input type="checkbox" name="class[]" value="3_GH033" id="3_GH033">
+														<label for="3_GH033">西洋美術賞析</label>
+														<input type="checkbox" name="class[]" value="3_GH036" id="3_GH036">
+														<label for="3_GH036">中國文化遺產及其藝術</label>
+														<input type="checkbox" name="class[]" value="3_GH037" id="3_GH037">
+														<label for="3_GH037">紀實影像解析</label>
+														<input type="checkbox" name="class[]" value="3_GH041" id="3_GH041">
+														<label for="3_GH041">漫談閩南語</label>
+														<input type="checkbox" name="class[]" value="3_GH042" id="3_GH042">
+														<label for="3_GH042">日本歷史與文化</label>
+														<input type="checkbox" name="class[]" value="3_GH043" id="3_GH043">
+														<label for="3_GH043">倫理價值與生命哲學</label>
+														<input type="checkbox" name="class[]" value="3_GH044" id="3_GH044">
+														<label for="3_GH044">文學與生活</label>
+														<input type="checkbox" name="class[]" value="3_GH202" id="3_GH202">
+														<label for="3_GH202">文學、電影DIY</label>
+														<input type="checkbox" name="class[]" value="3_GH206" id="3_GH206">
+														<label for="3_GH206">古典小說</label>
+														<input type="checkbox" name="class[]" value="3_GH207" id="3_GH207">
+														<label for="3_GH207">台灣文學</label>
+														<input type="checkbox" name="class[]" value="3_GH209" id="3_GH209">
+														<label for="3_GH209">台灣民間信仰</label>
+														<input type="checkbox" name="class[]" value="3_GH212" id="3_GH212">
+														<label for="3_GH212">生死與哲學</label>
+														<input type="checkbox" name="class[]" value="3_GH227" id="3_GH227">
+														<label for="3_GH227">電影藝術專題講座</label>
+														<input type="checkbox" name="class[]" value="3_GH215" id="3_GH215">
+														<label for="3_GH215">宗教與人生</label>
+														<input type="checkbox" name="class[]" value="3_GH218" id="3_GH218">
+														<label for="3_GH218">音樂與人生</label>
+														<input type="checkbox" name="class[]" value="3_GH232" id="3_GH232">
+														<label for="3_GH232">應用文</label>
+														<input type="checkbox" name="class[]" value="3_GH234" id="3_GH234">
+														<label for="3_GH234">領導的藝術</label>
+														<input type="checkbox" name="class[]" value="3_GH238" id="3_GH238">
+														<label for="3_GH238">批判思考</label>
+														<input type="checkbox" name="class[]" value="3_GH239" id="3_GH239">
+														<label for="3_GH239">性別與醫學倫理</label>
+														<input type="checkbox" name="class[]" value="3_GH241" id="3_GH241">
+														<label for="3_GH241">旅遊與多元學習</label>
+														<input type="checkbox" name="class[]" value="3_GH243" id="3_GH243">
+														<label for="3_GH243">從風景繪畫看臺灣歷史</label>
+														<input type="checkbox" name="class[]" value="3_GH251" id="3_GH251">
+														<label for="3_GH251">向儒道思想學情緒管理</label>
+														<input type="checkbox" name="class[]" value="3_GH252" id="3_GH252">
+														<label for="3_GH252">倫理思維與社會正義</label>
+														<input type="checkbox" name="class[]" value="3_GH254" id="3_GH254">
+														<label for="3_GH254">台灣環境與永續生活</label>
+														<input type="checkbox" name="class[]" value="3_GHE04" id="3_GHE04">
+														<label for="3_GHE04">世界音樂賞析</label>
+														<input type="checkbox" name="class[]" value="3_GN001" id="3_GN001">
+														<label for="3_GN001">土地關懷之旅</label>
+														<input type="checkbox" name="class[]" value="3_GN006" id="3_GN006">
+														<label for="3_GN006">生命科學</label>
+														<input type="checkbox" name="class[]" value="3_GN008" id="3_GN008">
+														<label for="3_GN008">生活中之物理</label>
+														<input type="checkbox" name="class[]" value="3_GN009" id="3_GN009">
+														<label for="3_GN009">皮膚保養醫學</label>
+														<input type="checkbox" name="class[]" value="3_GN017" id="3_GN017">
+														<label for="3_GN017">第三波戰爭之科技武器</label>
+														<input type="checkbox" name="class[]" value="3_GN020" id="3_GN020">
+														<label for="3_GN020">環境化學與環境生態</label>
+														<input type="checkbox" name="class[]" value="3_GN022" id="3_GN022">
+														<label for="3_GN022">現代軍事學</label>
+														<input type="checkbox" name="class[]" value="3_GN029" id="3_GN029">
+														<label for="3_GN029">科學傳播概論</label>
+														<input type="checkbox" name="class[]" value="3_GN037" id="3_GN037">
+														<label for="3_GN037">生活中的毒化物</label>
+														<input type="checkbox" name="class[]" value="3_GN038" id="3_GN038">
+														<label for="3_GN038">職業安全與衛生</label>
+														<input type="checkbox" name="class[]" value="3_GN041" id="3_GN041">
+														<label for="3_GN041">實用營養學</label>
+														<input type="checkbox" name="class[]" value="3_GN042" id="3_GN042">
+														<label for="3_GN042">國防科技與產業發展</label>
+														<input type="checkbox" name="class[]" value="3_GN043" id="3_GN043">
+														<label for="3_GN043">創新綠色科技</label>
+														<input type="checkbox" name="class[]" value="3_GN044" id="3_GN044">
+														<label for="3_GN044">系統品質建模與挑戰</label>
+														<input type="checkbox" name="class[]" value="3_GN208" id="3_GN208">
+														<label for="3_GN208">全球暖化與綠色環境設計</label>
+														<input type="checkbox" name="class[]" value="3_GN211" id="3_GN211">
+														<label for="3_GN211">奈米科技與生活</label>
+														<input type="checkbox" name="class[]" value="3_GN215" id="3_GN215">
+														<label for="3_GN215">科學的發明與應用</label>
+														<input type="checkbox" name="class[]" value="3_GN218" id="3_GN218">
+														<label for="3_GN218">殺蟲劑與生活</label>
+														<input type="checkbox" name="class[]" value="3_GN223" id="3_GN223">
+														<label for="3_GN223">肇事科學鑑定實務</label>
+														<input type="checkbox" name="class[]" value="3_GN224" id="3_GN224">
+														<label for="3_GN224">認識天然災害</label>
+														<input type="checkbox" name="class[]" value="3_GN226" id="3_GN226">
+														<label for="3_GN226">衛星科技應用</label>
+														<input type="checkbox" name="class[]" value="3_GN227" id="3_GN227">
+														<label for="3_GN227">營養與健康</label>
+														<input type="checkbox" name="class[]" value="3_GN228" id="3_GN228">
+														<label for="3_GN228">環境資源保育探索專題</label>
+														<input type="checkbox" name="class[]" value="3_GN229" id="3_GN229">
+														<label for="3_GN229">環境與公害</label>
+														<input type="checkbox" name="class[]" value="3_GN231" id="3_GN231">
+														<label for="3_GN231">醫學與人生</label>
+														<input type="checkbox" name="class[]" value="3_GN237" id="3_GN237">
+														<label for="3_GN237">化粧品科學與生活時尚</label>
+														<input type="checkbox" name="class[]" value="3_GN247" id="3_GN247">
+														<label for="3_GN247">材料與生活</label>
+														<input type="checkbox" name="class[]" value="3_GN252" id="3_GN252">
+														<label for="3_GN252">智慧城市與行動應用</label>
+														<input type="checkbox" name="class[]" value="3_GN253" id="3_GN253">
+														<label for="3_GN253">智慧城市無所不在的監測系統</label>
+														<input type="checkbox" name="class[]" value="3_GN255" id="3_GN255">
+														<label for="3_GN255">3D城市與數位校園</label>
+														<input type="checkbox" name="class[]" value="3_GN259" id="3_GN259">
+														<label for="3_GN259">食品加工的秘密</label>
+														<input type="checkbox" name="class[]" value="3_GS002" id="3_GS002">
+														<label for="3_GS002">中華民國憲法</label>
+														<input type="checkbox" name="class[]" value="3_GS009" id="3_GS009">
+														<label for="3_GS009">行政學</label>
+														<input type="checkbox" name="class[]" value="3_GS017" id="3_GS017">
+														<label for="3_GS017">國際關係</label>
+														<input type="checkbox" name="class[]" value="3_GS027" id="3_GS027">
+														<label for="3_GS027">戀愛心理學</label>
+														<input type="checkbox" name="class[]" value="3_GS037" id="3_GS037">
+														<label for="3_GS037">公民社會的政策參與</label>
+														<input type="checkbox" name="class[]" value="3_GS038" id="3_GS038">
+														<label for="3_GS038">智慧財產之保護與實務</label>
+														<input type="checkbox" name="class[]" value="3_GS039" id="3_GS039">
+														<label for="3_GS039">心理學整合與發展</label>
+														<input type="checkbox" name="class[]" value="3_GS041" id="3_GS041">
+														<label for="3_GS041">教育的理論與實踐</label>
+														<input type="checkbox" name="class[]" value="3_GS044" id="3_GS044">
+														<label for="3_GS044">經濟與生活</label>
+														<input type="checkbox" name="class[]" value="3_GS045" id="3_GS045">
+														<label for="3_GS045">管理面面觀</label>
+														<input type="checkbox" name="class[]" value="3_GS201" id="3_GS201">
+														<label for="3_GS201">大陸問題研究</label>
+														<input type="checkbox" name="class[]" value="3_GS204" id="3_GS204">
+														<label for="3_GS204">台灣社會文化變遷</label>
+														<input type="checkbox" name="class[]" value="3_GS206" id="3_GS206">
+														<label for="3_GS206">民法實用</label>
+														<input type="checkbox" name="class[]" value="3_GS207" id="3_GS207">
+														<label for="3_GS207">生涯規劃</label>
+														<input type="checkbox" name="class[]" value="3_GS210" id="3_GS210">
+														<label for="3_GS210">投資與理財</label>
+														<input type="checkbox" name="class[]" value="3_GS214" id="3_GS214">
+														<label for="3_GS214">服務學習專題</label>
+														<input type="checkbox" name="class[]" value="3_GS222" id="3_GS222">
+														<label for="3_GS222">婚姻與家庭</label>
+														<input type="checkbox" name="class[]" value="3_GS226" id="3_GS226">
+														<label for="3_GS226">新聞與媒體</label>
+														<input type="checkbox" name="class[]" value="3_GS243" id="3_GS243">
+														<label for="3_GS243">綠色環境與經濟</label>
+														<input type="checkbox" name="class[]" value="3_GS245" id="3_GS245">
+														<label for="3_GS245">性別教育與服務-學習</label>
+														<input type="checkbox" name="class[]" value="3_GS251" id="3_GS251">
+														<label for="3_GS251">智慧城市競爭力</label>
+														<input type="checkbox" name="class[]" value="3_GS254" id="3_GS254">
+														<label for="3_GS254">現代韓國社會和文化</label>
+														<input type="checkbox" name="class[]" value="3_GSE03" id="3_GSE03">
+														<label for="3_GSE03">臺灣政治經濟發展</label>
+														<input type="checkbox" name="class[]" value="3_GS239" id="3_GS239">
+														<label for="3_GS239">時間管理專題</label>
+														<input type="checkbox" name="class[]" value="3_GM205" id="3_GM205">
+														<label for="3_GM205">初階智慧型創新</label>
+														<input type="checkbox" name="class[]" value="3_GM216" id="3_GM216">
+														<label for="3_GM216">觀光美儀與國際禮儀</label>
+														<input type="checkbox" name="class[]" value="3_GM218" id="3_GM218">
+														<label for="3_GM218">空間資訊與智慧生活</label>
+														<input type="checkbox" name="class[]" value="3_GM219" id="3_GM219">
+														<label for="3_GM219">專案管理基礎知識培養</label>
+														<input type="checkbox" name="class[]" value="3_GM220" id="3_GM220">
+														<label for="3_GM220">消費行為與新產品企劃</label>
+														<input type="checkbox" name="class[]" value="3_GM228" id="3_GM228">
+														<label for="3_GM228">從空間看世界</label>
+														<input type="checkbox" name="class[]" value="3_GM243" id="3_GM243">
+														<label for="3_GM243">圓一場藝術家的夢</label>
+														<input type="checkbox" name="class[]" value="3_GM246" id="3_GM246">
+														<label for="3_GM246">音樂劇實作演出</label>
+														<input type="checkbox" name="class[]" value="3_GM247" id="3_GM247">
+														<label for="3_GM247">社區文化感動行銷</label>
+														<input type="checkbox" name="class[]" value="3_GM252" id="3_GM252">
+														<label for="3_GM252">智慧的天空之眼</label>
+														<input type="checkbox" name="class[]" value="3_GM260" id="3_GM260">
+														<label for="3_GM260">智慧綠台灣</label>
+														<input type="checkbox" name="class[]" value="3_GM267" id="3_GM267">
+														<label for="3_GM267">3D列印趨勢與應用</label>
+														<input type="checkbox" name="class[]" value="3_GM268" id="3_GM268">
+														<label for="3_GM268">智慧定位-衛星導航</label>
+														<input type="checkbox" name="class[]" value="3_GM273" id="3_GM273">
+														<label for="3_GM273">創業與創新</label>
+														<input type="checkbox" name="class[]" value="3_GM297" id="3_GM297">
+														<label for="3_GM297">傳統藝術文化與技藝入門</label>
+														<input type="checkbox" name="class[]" value="3_GH019" id="3_GH019">
+														<label for="3_GH019">英美文學欣賞</label>
+														<input type="checkbox" name="class[]" value="3_GH201" id="3_GH201">
+														<label for="3_GH201">文物欣賞與藝術創作專題</label>
+														<input type="checkbox" name="class[]" value="3_GH253" id="3_GH253">
+														<label for="3_GH253">西洋文學與文化</label>
+														<input type="checkbox" name="class[]" value="3_GN039" id="3_GN039">
+														<label for="3_GN039">環境資源與綠色生活</label>
+														<input type="checkbox" name="class[]" value="3_GN040" id="3_GN040">
+														<label for="3_GN040">生態環境保育</label>
+														<input type="checkbox" name="class[]" value="3_GN205" id="3_GN205">
+														<label for="3_GN205">生物學與生物倫理</label>
+														<input type="checkbox" name="class[]" value="3_GN240" id="3_GN240">
+														<label for="3_GN240">性別與心理衛生</label>
+														<input type="checkbox" name="class[]" value="3_GN243" id="3_GN243">
+														<label for="3_GN243">醫學美容與人生</label>
+														<input type="checkbox" name="class[]" value="3_GN244" id="3_GN244">
+														<label for="3_GN244">綠能與環境</label>
+														<input type="checkbox" name="class[]" value="3_GN249" id="3_GN249">
+														<label for="3_GN249">生活中的工程與科技</label>
+														<input type="checkbox" name="class[]" value="3_GN256" id="3_GN256">
+														<label for="3_GN256">氣候變遷對臺灣之衝擊</label>
+														<input type="checkbox" name="class[]" value="3_GN258" id="3_GN258">
+														<label for="3_GN258">食品衛生與安全</label>
+														<input type="checkbox" name="class[]" value="3_GS008" id="3_GS008">
+														<label for="3_GS008">地方自治</label>
+														<input type="checkbox" name="class[]" value="3_GS032" id="3_GS032">
+														<label for="3_GS032">台灣社會與文化</label>
+														<input type="checkbox" name="class[]" value="3_GS036" id="3_GS036">
+														<label for="3_GS036">個人資料保護法</label>
+														<input type="checkbox" name="class[]" value="3_GS038" id="3_GS038">
+														<label for="3_GS038">智慧財產之保護與實務</label>
+														<input type="checkbox" name="class[]" value="3_GS046" id="3_GS046">
+														<label for="3_GS046">社會學與生活體驗</label>
+														<input type="checkbox" name="class[]" value="3_GS206" id="3_GS206">
+														<label for="3_GS206">民法實用</label>
+														<input type="checkbox" name="class[]" value="3_GS221" id="3_GS221">
+														<label for="3_GS221">消費者保護法</label>
+														<input type="checkbox" name="class[]" value="3_GS223" id="3_GS223">
+														<label for="3_GS223">教育與人生</label>
+														<input type="checkbox" name="class[]" value="3_GN235" id="3_GN235">
+														<label for="3_GN235">大陸文教、社經與科技發展大觀</label>
+														<input type="checkbox" name="class[]" value="3_GS248" id="3_GS248">
+														<label for="3_GS248">策略理論與中國崛起</label>
+														<input type="checkbox" name="class[]" value="3_GM211" id="3_GM211">
+														<label for="3_GM211"> 歐洲舞台藝術表演</label>
+														<input type="checkbox" name="class[]" value="3_GM212" id="3_GM212">
+														<label for="3_GM212">社區支持型農業之在地實踐</label>
+													</fieldset>
+												</div>
+												<div id="tabs3-5">
+													<fieldset data-role="controlgroup" data-type="horizontal">
+														<input type="checkbox" name="class[]" value="3_99150" id="3_99150">
+														<label for="3_99150">體育－游泳</label>
+														<input type="checkbox" name="class[]" value="3_161" id="3_161">
+														<label for="3_161">體育(一)</label>
+														<input type="checkbox" name="class[]" value="3_162" id="3_162">
+														<label for="3_162">體育(二)</label>
+														<input type="checkbox" name="class[]" value="3_303" id="3_303">
+														<label for="3_303">體育－武術</label>
+														<input type="checkbox" name="class[]" value="3_21760" id="3_21760">
+														<label for="3_21760">體育-彼拉提斯</label>
+														<input type="checkbox" name="class[]" value="3_21761" id="3_21761">
+														<label for="3_21761">體育－健康與塑身</label>
+														<input type="checkbox" name="class[]" value="3_99010" id="3_99010">
+														<label for="3_99010">體育－手球</label>
+														<input type="checkbox" name="class[]" value="3_99012" id="3_99012">
+														<label for="3_99012">體育－太極十八式</label>
+														<input type="checkbox" name="class[]" value="3_99015" id="3_99015">
+														<label for="3_99015">體育－攀岩</label>
+														<input type="checkbox" name="class[]" value="3_99017" id="3_99017">
+														<label for="3_99017">體育－民俗體育</label>
+														<input type="checkbox" name="class[]" value="3_99019" id="3_99019">
+														<label for="3_99019">體育－瑜珈</label>
+														<input type="checkbox" name="class[]" value="3_99021" id="3_99021">
+														<label for="3_99021">體育－強力塑身</label>
+														<input type="checkbox" name="class[]" value="3_99023" id="3_99023">
+														<label for="3_99023">體育－飛輪有氧</label>
+														<input type="checkbox" name="class[]" value="3_99026" id="3_99026">
+														<label for="3_99026">體育－羽球進階</label>
+														<input type="checkbox" name="class[]" value="3_99031" id="3_99031">
+														<label for="3_99031">體育－飛盤</label>
+														<input type="checkbox" name="class[]" value="3_99070" id="3_99070">
+														<label for="3_99070">體育－足球</label>
+														<input type="checkbox" name="class[]" value="3_99090" id="3_99090">
+														<label for="3_99090">體育－桌球</label>
+														<input type="checkbox" name="class[]" value="3_99100" id="3_99100">
+														<label for="3_99100">體育－軟式網球</label>
+														<input type="checkbox" name="class[]" value="3_99110" id="3_99110">
+														<label for="3_99110">體育－硬式網球</label>
+														<input type="checkbox" name="class[]" value="3_99220" id="3_99220">
+														<label for="3_99220">體育－籃球</label>
+														<input type="checkbox" name="class[]" value="3_99120" id="3_99120">
+														<label for="3_99120">體育－國術(太極拳)</label>
+														<input type="checkbox" name="class[]" value="3_99140" id="3_99140">
+														<label for="3_99140">體育－排球</label>
+														<input type="checkbox" name="class[]" value="3_99231" id="3_99231">
+														<label for="3_99231">體育－爵士韻律流行舞</label>
+														<input type="checkbox" name="class[]" value="3_99240" id="3_99240">
+														<label for="3_99240">體育－高爾夫球</label>
+														<input type="checkbox" name="class[]" value="3_99250" id="3_99250">
+														<label for="3_99250">體育－防身術</label>
+														<input type="checkbox" name="class[]" value="3_99260" id="3_99260">
+														<label for="3_99260">體育－羽球</label>
+														<input type="checkbox" name="class[]" value="3_99310" id="3_99310">
+														<label for="3_99310">體育－階梯有氧運動</label>
+														<input type="checkbox" name="class[]" value="3_99351" id="3_99351">
+														<label for="3_99351">體育－韻律舞蹈</label>
+														<input type="checkbox" name="class[]" value="3_99060" id="3_99060">
+														<label for="3_99060">體育－適應體育班</label>
+													</fieldset>
+												</div>
+											</div>
+										</div>	
+											
+											<input id="Submit" type="submit" value="查詢推薦課程">
+											</blockquote>
+									</form>
+									
+									
+								</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								
+							</td>
+						</tr>
+					</table>
+				</div>
+		
+	
+
+</body>
+</html>
